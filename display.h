@@ -6,6 +6,7 @@ class Display {
 protected:
     Board *board;
 public:
+    Display(Board *board) : board{board} {};
     virtual void notify();
     virtual ~Display();
 };
