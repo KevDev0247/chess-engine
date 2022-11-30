@@ -22,12 +22,12 @@ bool Player::baseCheckValidity(Board boardClass, Move move) {
     if (white && isupper(piece)) return false;
     if (!white && islower(piece)) return false;
 
-    if ((piece == 'P' | 'p') && !((horizontal == 1 && vertical == 0) | (horizontal == 0 && vertical == 1))) return false;
-    if ((piece == 'K' | 'k') && !(horizontal == 1 | vertical == 1)) return false;
-    if ((piece == 'Q' | 'q') && !(horizontal == vertical | horizontal == 0 | vertical == 0)) return false;
-    if ((piece == 'R' | 'r') && !(horizontal == 0 | vertical == 0)) return false;
-    if ((piece == 'B' | 'b') && !(horizontal == vertical)) return false;
-    if ((piece == 'H' | 'h') && !((horizontal == 2 && vertical == 1) | (horizontal == 1 && vertical == 2))) return false;
+    if ((piece == 'P' || 'p') && !((horizontal == 1 && vertical == 0) || (horizontal == 0 && vertical == 1))) return false;
+    if ((piece == 'K' || 'k') && !(horizontal == 1 || vertical == 1)) return false;
+    if ((piece == 'Q' || 'q') && !(horizontal == vertical || horizontal == 0 || vertical == 0)) return false;
+    if ((piece == 'R' || 'r') && !(horizontal == 0 || vertical == 0)) return false;
+    if ((piece == 'B' || 'b') && !(horizontal == vertical)) return false;
+    if ((piece == 'H' || 'h') && !((horizontal == 2 && vertical == 1) || (horizontal == 1 && vertical == 2))) return false;
 
     return true;
 }
