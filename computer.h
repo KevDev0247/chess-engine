@@ -7,7 +7,7 @@ class Computer : Player {
     public:
         Computer();
 
-        Move getMove(Board board);
+        virtual Move getMove(Board board) = 0;
 };
 
 #endif

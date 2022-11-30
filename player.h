@@ -7,9 +7,6 @@
 class Player {
     public:
         Player();
-
-        // need Board
-        virtual Move getMove(Board board) = 0;
 };
 
 #endif

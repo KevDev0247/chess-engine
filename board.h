@@ -6,7 +6,7 @@
 #include "display.h"
 
 class Board {
-    char **board;
+    std::vector<std::vector<char>> board;
     bool canCastleWhite;
     std::vector<Display*> displays;
     // need moveGen
@@ -22,6 +22,8 @@ class Board {
         std::string getFEN();
         void attachDisplay(Display* display);
         void detachDisplay(Display* display);
+
+        std::vector<std::vector<char>> getBoard();
 };
 
 #endif

@@ -7,7 +7,7 @@ class Human : Player {
     public:
         Human();
 
-        Move getMove(Board board);
+        bool checkValidity(Board board, Move move);
 };
 
 #endif

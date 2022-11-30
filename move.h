@@ -7,11 +7,17 @@ class Move {
     int originSquareY;
     int dstSqaureX;
     int dstSqaureY;
+    char piece;
 
     public:
-        Move(int originSquareX, int originSquareY, int dstSqaureX, int dstSqaureY);
+        Move(int originSquareX, int originSquareY, int dstSqaureX, int dstSqaureY, char piece);
 
         std::string getString();
+        int getDstSquareX();
+        int getDstSquareY();
+        int getOriginSquareX();
+        int getOriginSquareY();
+        char getPiece();
 };
 
 #endif
