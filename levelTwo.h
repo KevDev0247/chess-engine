@@ -7,7 +7,7 @@
 
 class LevelTwo : Computer {
     public:
-        LevelTwo();
+        LevelTwo(PieceMoveGen* moveGen);
 
         Move getMove(Board board);
 };

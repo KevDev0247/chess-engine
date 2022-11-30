@@ -6,8 +6,7 @@
 #include "board.h"
 #include "pieceMoveGen.h"
 
-class LevelOne : Computer {
-    PieceMoveGen *moveGen;
+class LevelOne : public Computer {
     public:
         LevelOne(PieceMoveGen *moveGen);
 
