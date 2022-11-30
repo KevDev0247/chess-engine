@@ -5,16 +5,20 @@
 #include "player.h"
 #include "display.h"
 
+class PieceMoveGen;
+
 class Board {
     std::vector<std::vector<char>> board;
     bool canCastleWhite;
     bool whitePlaying;
     std::vector<Display*> displays;
+    PieceMoveGen *moveGen;
     // need moveGen
     public:
         Board();
 
         // need type for method
+        void setPieceMoveGen(PieceMoveGen *moveGen);
         Move attacks();
         bool inChecks();
         bool causeCheck();

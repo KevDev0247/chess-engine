@@ -5,10 +5,12 @@
 #include "board.h"
 
 class Player {
-    public:
-        Player();
+protected:
+    Board *board;
+public:
+    Player(Board *board) : board{board} {};
 
-        bool baseCheckValidity(Board boardClass, Move move);
+    bool baseCheckValidity(Board boardClass, Move move);
 };
 
 #endif

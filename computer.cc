@@ -1,8 +1,5 @@
 #include "computer.h"
-#include "pieceMoveGen.h"
 using namespace std;
-
-Computer::Computer(PieceMoveGen *moveGen) : moveGen{moveGen} {}
 
 bool Computer::baseCheckLevelTwo(Board boardClass, Move move) {
     int dstX = move.getDstSquareX();
@@ -18,8 +15,4 @@ bool Computer::baseCheckLevelTwo(Board boardClass, Move move) {
 bool Computer::baseCheckLevelThree(Board boardClass, Move move) {
     // add checks and return false
     return true;
-}
-
-PieceMoveGen* Computer::getMoveGen() {
-    return moveGen;
 }
