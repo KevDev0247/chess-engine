@@ -7,6 +7,8 @@
 class Player {
     public:
         Player();
+
+        bool baseCheckValidity(Board boardClass, Move move);
 };
 
 #endif
