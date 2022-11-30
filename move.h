@@ -3,11 +3,13 @@
 #include <iostream>
 
 class Move {
-    int originSquare;
-    int dstSqaure;
+    int originSquareX;
+    int originSquareY;
+    int dstSqaureX;
+    int dstSqaureY;
 
     public:
-        Move();
+        Move(int originSquareX, int originSquareY, int dstSqaureX, int dstSqaureY);
 
         std::string getString();
 };
