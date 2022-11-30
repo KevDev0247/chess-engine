@@ -7,12 +7,11 @@
 #include "moveGen.h"
 
 class PieceMoveGen : MoveGen {
-    protected:
-        MoveGen* prev;
-    public:
-        PieceMoveGen(MoveGen* prev);
-        std::vector<Move> getMoves(Board board, bool whitePlaying);
-        virtual ~PieceMoveGen();
+    MoveGen *next;
+public:
+    PieceMoveGen(MoveGen* next, Board *board) : next{next}, MoveGen{board} {};
+    virtual std::vector<Move> getMoves();
+    virtual ~PieceMoveGen();
 };
 
 #endif

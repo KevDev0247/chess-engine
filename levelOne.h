@@ -8,9 +8,9 @@
 
 class LevelOne : public Computer {
     public:
-        LevelOne(PieceMoveGen *moveGen);
+        LevelOne(Board *board) : Computer{board} {};
 
-        Move getMove(Board board);
+        Move getMove();
 };
 
 #endif

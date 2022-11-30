@@ -10,7 +10,7 @@ protected:
 public:
     Player(Board *board) : board{board} {};
 
-    bool baseCheckValidity(Board boardClass, Move move);
+    bool baseCheckValidity(Move move);
 };
 
 #endif

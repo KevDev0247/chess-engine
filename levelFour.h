@@ -7,9 +7,9 @@
 
 class LevelFour : Computer {
     public:
-        LevelFour();
+        LevelFour(Board *board) : Computer{board} {};
 
-        Move getMove(Board board);
+        Move getMove();
 };
 
 #endif

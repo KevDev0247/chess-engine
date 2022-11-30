@@ -6,10 +6,12 @@
 #include "board.h"
 
 class MoveGen {
-    public:
-        MoveGen();
+protected:
+    Board *board;
+public:
+    MoveGen(Board *board) : board{board} {};
 
-        std::vector<Move> getMove(Board board, bool whitePlaying);
+    std::vector<Move> virtual getMoves();
 };
 
 #endif

@@ -19,6 +19,7 @@ class Board {
 
         // need type for method
         void setPieceMoveGen(PieceMoveGen *moveGen);
+        std::vector<Move> getMoves();
         Move attacks();
         bool inChecks();
         bool causeCheck();

@@ -2,20 +2,18 @@
 #include <vector>
 using namespace std;
 
-Player::Player() {}
-
-bool Player::baseCheckValidity(Board boardClass, Move move) {
+bool Player::baseCheckValidity(Move move) {
     int dstX = move.getDstSquareX();
     int dstY = move.getDstSquareY();
     int originX = move.getOriginSquareX();
     int originY = move.getOriginSquareY();
-    bool white = boardClass.getWhitePlaying();
-    vector<vector<char>> board = boardClass.getBoard();
+    bool white = board->getWhitePlaying();
+    vector<vector<char>> boardArray = board->getBoard();
 
-    if (!(dstX > 0 && dstX < board.front().size() && dstY > 0 && dstY < board.size())) 
+    if (!(dstX > 0 && dstX < boardArray.front().size() && dstY > 0 && dstY < boardArray.size())) 
         return false;
 
-    char piece = board.at(dstY).at(dstX);
+    char piece = boardArray.at(dstY).at(dstX);
     int vertical = abs(originY - dstY);
     int horizontal = abs(originX - dstX);
 
