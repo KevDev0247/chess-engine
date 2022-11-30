@@ -7,7 +7,7 @@ class Human : Player {
     public:
         Human();
 
-        Move getMove();
+        Move getMove(Board board);
 };
 
 #endif

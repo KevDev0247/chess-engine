@@ -8,6 +8,8 @@ class Move {
 
     public:
         Move();
+
+        std::string getString();
 };
 
 #endif
