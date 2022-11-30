@@ -3,9 +3,11 @@
 #include "board.h"
 
 class Display {
+protected:
     Board *board;
-
-    void notify();
+public:
+    virtual void notify();
+    virtual ~Display();
 };
 
 #endif
