@@ -8,10 +8,10 @@
 
 class PieceMoveGen : MoveGen {
     protected:
-        MoveGen *prev;
+        MoveGen* prev;
     public:
-        PieceMoveGen(MoveGen *prev);
-        std::vector<Move> getMove(Board board, bool whitePlaying);
+        PieceMoveGen(MoveGen* prev);
+        std::vector<Move> getMoves(Board board, bool whitePlaying);
         virtual ~PieceMoveGen();
 };
 

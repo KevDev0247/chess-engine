@@ -4,10 +4,12 @@
 #include "computer.h"
 #include "move.h"
 #include "board.h"
+#include "pieceMoveGen.h"
 
 class LevelOne : Computer {
+    PieceMoveGen *moveGen;
     public:
-        LevelOne();
+        LevelOne(PieceMoveGen *moveGen);
 
         Move getMove(Board board);
 };
