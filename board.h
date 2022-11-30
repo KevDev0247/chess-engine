@@ -8,6 +8,7 @@
 class Board {
     std::vector<std::vector<char>> board;
     bool canCastleWhite;
+    bool whitePlaying;
     std::vector<Display*> displays;
     // need moveGen
     public:
@@ -24,6 +25,7 @@ class Board {
         void detachDisplay(Display* display);
 
         std::vector<std::vector<char>> getBoard();
+        bool getWhitePlaying();
 };
 
 #endif
