@@ -4,7 +4,12 @@ using namespace std;
 
 int main() {
     string input;
-
+    // Can encapsulate all of this information in the Game class for better style
+    string whiteType;
+    string blackType;
+    string turn = "White";
+    int whiteScore = 0, blackscore = 0;
+    
     while (!cin.eof()) {
         getline(cin, input);
         istringstream ss{ input };
@@ -15,30 +20,41 @@ int main() {
             string command;
             ss >> command;
             if (command == "game") {
-                string white;
-                string black;
+                
+                ss >> whiteType >> blackType;
 
-                ss >> white >> black;
-                if (white == "human") {
-                    
-                } else {
-
-                }
-
-                if (black == "human") {
-
-                } else {
-
-                }
             }
             if (command == "resign") {
-                // need a field in player to determine turn and decide
+                if (turn == "White") {
+                    // Can also include this in Game with ostream
+                    ++blackscore;
+                    cout << turn << " wins!" << endl;
+                } else {
+                    ++whitescore;
+                    cout << turn << " wins!" << endl;
+                }
+                
             }
             if (command == "move") {
-                string start;
-                string end;
-
-                ss >> start >> end;
+                if (turn == "White") {
+                    if (whiteType == "human") {
+                        string start;
+                        string end;
+                        ss >> start >> end;
+                    } else {
+                        // getMove from computer level
+                    }
+                    turn = "Black";
+                } else {
+                    if (blackType == "human") {
+                        string start;
+                        string end;
+                        ss >> start >> end;
+                    } else {
+                        // getMove from computer level
+                    }
+                    turn = "White";
+                }
             }
             if (command == "setup") {
                 while (!cin.eof()) {
