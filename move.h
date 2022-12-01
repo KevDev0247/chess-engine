@@ -2,22 +2,22 @@
 #define MOVE_H
 #include <iostream>
 
-class Move {
+enum MoveType {
+    Normal,
+    Castling,
+    Promotion,
+    EnPassant
+};
+
+struct Move {
     int originSquareX;
     int originSquareY;
-    int dstSqaureX;
-    int dstSqaureY;
-    char piece;
+    int dstSquareX;
+    int dstSquareY;
+    char promotionPiece;
+    MoveType moveType;
 
-    public:
-        Move(int originSquareX, int originSquareY, int dstSqaureX, int dstSqaureY, char piece);
-
-        std::string getString();
-        int getDstSquareX();
-        int getDstSquareY();
-        int getOriginSquareX();
-        int getOriginSquareY();
-        char getPiece();
+    std::string getString() const;
 };
 
 #endif

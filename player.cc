@@ -3,10 +3,10 @@
 using namespace std;
 
 bool Player::baseCheckValidity(Move move) {
-    int dstX = move.getDstSquareX();
-    int dstY = move.getDstSquareY();
-    int originX = move.getOriginSquareX();
-    int originY = move.getOriginSquareY();
+    int dstX = move.dstSquareX;
+    int dstY = move.dstSquareY;
+    int originX = move.originSquareX;
+    int originY = move.originSquareY;
     bool white = board->getWhitePlaying();
     vector<vector<char>> boardArray = board->getBoard();
 

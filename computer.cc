@@ -2,8 +2,8 @@
 using namespace std;
 
 bool Computer::baseCheckLevelTwo(Move move) {
-    int dstX = move.getDstSquareX();
-    int dstY = move.getDstSquareY();
+    int dstX = move.dstSquareX;
+    int dstY = move.dstSquareY;
     vector<vector<char>> boardArray = board->getBoard();
     char piece = boardArray.at(dstY).at(dstX);
 
