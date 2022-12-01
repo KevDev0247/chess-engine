@@ -28,7 +28,7 @@ class Board {
         std::string getFEN();
         void attachDisplay(Display* display);
         void detachDisplay(Display* display);
-
+        bool baseCheckValidity(Move move);
         std::vector<std::vector<char>> getBoard();
         bool getWhitePlaying();
 };

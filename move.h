@@ -17,6 +17,15 @@ struct Move {
     char promotionPiece;
     MoveType moveType;
 
+    Move(
+        int originSquareX,
+        int originSquareY,
+        int dstSquareX,
+        int dstSquareY,
+        char promotionPiece,
+        MoveType moveType
+    );
+
     std::string getString() const;
 };
 

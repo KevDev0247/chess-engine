@@ -9,8 +9,6 @@ protected:
     Board *board;
 public:
     Player(Board *board) : board{board} {};
-
-    bool baseCheckValidity(Move move);
 };
 
 #endif

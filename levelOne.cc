@@ -7,7 +7,7 @@ Move LevelOne::getMove() {
     
     vector<Move> levelOneMoves;
     for (auto move : moves) {
-        if (baseCheckValidity(move)) levelOneMoves.push_back(move);
+        if (board->baseCheckValidity(move)) levelOneMoves.push_back(move);
     }
     return levelOneMoves.front();
 }
