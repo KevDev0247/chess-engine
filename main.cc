@@ -30,7 +30,7 @@ int main() {
                     ++blackscore;
                     cout << turn << " wins!" << endl;
                 } else {
-                    ++whitescore;
+                    ++whiteScore;
                     cout << turn << " wins!" << endl;
                 }
                 

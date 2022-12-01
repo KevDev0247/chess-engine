@@ -3,11 +3,11 @@
 #include <iostream>
 #include "player.h"
 
-class Human : Player {
+class Human : public Player {
     public:
-        Human();
+        Human(Board *board) : Player{board} {};
 
-        bool checkValidity(Board board, Move move);
+        bool checkValidity(Move move);
 };
 
 #endif

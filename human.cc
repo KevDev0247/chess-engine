@@ -1,11 +1,10 @@
 #include "human.h"
+#include "player.h"
 #include <vector>
 using namespace std;
 
-Human::Human() {}
-
-bool Human::checkValidity(Board boardClass, Move move) {
-    return baseCheckValidity(boardClass, move);
+bool Human::checkValidity(Move move) {
+    return board->baseCheckValidity(move);
 }
 
  

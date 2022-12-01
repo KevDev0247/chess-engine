@@ -1,4 +1,5 @@
 #include "computer.h"
+#include <vector>
 using namespace std;
 
 bool Computer::baseCheckLevelTwo(Move move) {
@@ -13,6 +14,16 @@ bool Computer::baseCheckLevelTwo(Move move) {
 }
 
 bool Computer::baseCheckLevelThree(Move move) {
-    // add checks and return false
+    int dstX = move.dstSquareX;
+    int dstY = move.dstSquareY;
+
+    Board* mockBoard = board;
+    mockBoard->executeMove(move);
+    vector<Move> generatedMoves = mockBoard->getMoves();
+
+    for (auto generatedMove : generatedMoves) 
+        if (generatedMove.dstSquareX == dstX && generatedMove.dstSquareY == dstY)
+            return false;
+    
     return true;
 }
