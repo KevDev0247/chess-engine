@@ -7,6 +7,11 @@ void Board::setPieceMoveGen(PieceMoveGen *moveGen) {
     this->moveGen = moveGen;
 }
 
+bool Board::executeMove(Move move) {
+    board.at(move.dstSquareY).at(move.dstSquareX) = move.piece;
+    board.at(move.originSquareY).at(move.originSquareX) = '-';
+}
+
 std::vector<Move> Board::getMoves() {
     return moveGen->getMoves();
 }

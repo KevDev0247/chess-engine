@@ -15,6 +15,7 @@ struct Move {
     int dstSquareX;
     int dstSquareY;
     char promotionPiece;
+    char piece;
     MoveType moveType;
 
     Move(
@@ -23,6 +24,7 @@ struct Move {
         int dstSquareX,
         int dstSquareY,
         char promotionPiece,
+        char piece,
         MoveType moveType
     );
 

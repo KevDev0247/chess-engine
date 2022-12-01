@@ -6,7 +6,8 @@ Move::Move(
   int dstSquareX,
   int dstSquareY,
   char promotionPiece,
+  char piece,
   MoveType moveType
 ) : originSquareX{originSquareX}, originSquareY{originSquareY},
 dstSquareX{dstSquareX}, dstSquareY{dstSquareY}, promotionPiece{promotionPiece},
-moveType{moveType} {}
+piece{piece}, moveType{moveType} {}

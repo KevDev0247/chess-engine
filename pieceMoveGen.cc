@@ -21,6 +21,7 @@ vector<Move> KingMoveGen::getMoves() {
           j + 1,
           i + 1,
           ' ',
+          boardArray[i][j],
           MoveType::Normal
         });
 
@@ -30,6 +31,7 @@ vector<Move> KingMoveGen::getMoves() {
           j + 1,
           i,
           ' ',
+          boardArray[i][j],
           MoveType::Normal
         });
 
@@ -39,6 +41,7 @@ vector<Move> KingMoveGen::getMoves() {
           j + 1,
           i - 1,
           ' ',
+          boardArray[i][j],
           MoveType::Normal
         });
 
@@ -48,6 +51,7 @@ vector<Move> KingMoveGen::getMoves() {
           j,
           i + 1,
           ' ',
+          boardArray[i][j],
           MoveType::Normal
         });
 
@@ -57,6 +61,7 @@ vector<Move> KingMoveGen::getMoves() {
           j,
           i - 1,
           ' ',
+          boardArray[i][j],
           MoveType::Normal
         });
 
@@ -66,6 +71,7 @@ vector<Move> KingMoveGen::getMoves() {
           j - 1,
           i - 1,
           ' ',
+          boardArray[i][j],
           MoveType::Normal
         });
 
@@ -75,6 +81,7 @@ vector<Move> KingMoveGen::getMoves() {
           j - 1,
           i,
           ' ',
+          boardArray[i][j],
           MoveType::Normal
         });
 
@@ -84,6 +91,7 @@ vector<Move> KingMoveGen::getMoves() {
           j - 1,
           i + 1,
           ' ',
+          boardArray[i][j],
           MoveType::Normal
         });
       }
