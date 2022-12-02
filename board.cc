@@ -1,6 +1,7 @@
 #include "board.h"
 #include "pieceMoveGen.h"
 #include <vector>
+#include <iostream>
 using namespace std;
 
 Board::Board() {
@@ -102,18 +103,20 @@ bool Board::baseCheckValidity(Move move) {
     char dstPiece = board.at(dstY).at(dstX);
     int vertical = abs(originY - dstY);
     int horizontal = abs(originX - dstX);
+    cout << originPiece << ' ' << dstPiece << endl;
 
     if (whitePlaying && isupper(dstPiece)) return false;
     if (whitePlaying && islower(originPiece)) return false;
     if (!whitePlaying && islower(dstPiece)) return false;
     if (!whitePlaying && isupper(originPiece)) return false;
+    cout << vertical << ' ' << horizontal << endl;
 
-    if ((originPiece == 'P' || 'p') && !((horizontal == 0 && vertical == 2) || (horizontal == 0 && vertical == 1))) return false;
-    if ((originPiece == 'K' || 'k') && !(horizontal == 1 || vertical == 1)) return false;
-    if ((originPiece == 'Q' || 'q') && !(horizontal == vertical || horizontal == 0 || vertical == 0)) return false;
-    if ((originPiece == 'R' || 'r') && !(horizontal == 0 || vertical == 0)) return false;
-    if ((originPiece == 'B' || 'b') && !(horizontal == vertical)) return false;
-    if ((originPiece == 'H' || 'h') && !((horizontal == 2 && vertical == 1) || (horizontal == 1 && vertical == 2))) return false;
+    if ((originPiece == 'P' || originPiece == 'p') && !((horizontal == 0 && vertical == 2) || (horizontal == 0 && vertical == 1))) return false;
+    if ((originPiece == 'K' || originPiece == 'k') && !(horizontal == 1 || vertical == 1)) return false;
+    if ((originPiece == 'Q' || originPiece == 'q') && !(horizontal == vertical || horizontal == 0 || vertical == 0)) return false;
+    if ((originPiece == 'R' || originPiece == 'r') && !(horizontal == 0 || vertical == 0)) return false;
+    if ((originPiece == 'B' || originPiece == 'b') && !(horizontal == vertical)) return false;
+    if ((originPiece == 'H' || originPiece == 'h') && !((horizontal == 2 && vertical == 1) || (horizontal == 1 && vertical == 2))) return false;
 
     return true;
 }
