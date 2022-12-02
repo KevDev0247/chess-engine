@@ -14,7 +14,7 @@ vector<Move> KnightMoveGen::getMoves() {
   vector<Move> newMoves;
   for (int i = 0; i < 8; i++) {
     for (int j = 0; j < 8; j++) {
-      if (boardArray[i][j] == 'h' || boardArray[i][j] == 'H') {
+      if (boardArray[i][j] == 'n' || boardArray[i][j] == 'N') {
         newMoves.push_back({
           j,
           i,
