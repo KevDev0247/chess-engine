@@ -11,7 +11,7 @@ protected:
 public:
     MoveGen(Board *board) : board{board} {};
 
-    std::vector<Move> virtual getMoves();
+    std::vector<Move> virtual getMoves() {return std::vector<Move>();};
 };
 
 #endif
