@@ -84,8 +84,10 @@ bool Board::baseCheckValidity(Move move) {
     if (!whitePlaying && isupper(originPiece)) return false;
     cout << vertical << ' ' << horizontal << endl;
 
-    if ((originPiece == 'P' || originPiece == 'p') && !((horizontal == 0 && vertical == 2) || (horizontal == 0 && vertical == 1))) return false;
-    if ((originPiece == 'K' || originPiece == 'k') && !(horizontal == 1 || vertical == 1)) return false;
+    if ((originPiece == 'P' || originPiece == 'p') && !((horizontal == 0 && vertical == 2) || (horizontal == 0 && vertical == 1)
+                                                        || (horizontal == 1 && vertical == 1))) return false;
+    if ((originPiece == 'K' || originPiece == 'k') && !(horizontal == 1 || vertical == 1 ||
+                                                        (horizontal == 2 && vertical == 0) || (horizontal == 3 && vertical == 0))) return false;
     if ((originPiece == 'Q' || originPiece == 'q') && !(horizontal == vertical || horizontal == 0 || vertical == 0)) return false;
     if ((originPiece == 'R' || originPiece == 'r') && !(horizontal == 0 || vertical == 0)) return false;
     if ((originPiece == 'B' || originPiece == 'b') && !(horizontal == vertical)) return false;
