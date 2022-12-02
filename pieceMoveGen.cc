@@ -198,33 +198,6 @@ vector<Move> KingMoveGen::getMoves() {
           boardArray[i][j],
           MoveType::Normal
         });
-        newMoves.push_back({
-          j,
-          i,
-          j - 1,
-          i,
-          ' ',
-          boardArray[i][j],
-          MoveType::Normal
-        });
-        newMoves.push_back({
-          j,
-          i,
-          j,
-          i + 1,
-          ' ',
-          boardArray[i][j],
-          MoveType::Normal
-        });
-        newMoves.push_back({
-          j,
-          i,
-          j,
-          i + 1,
-          ' ',
-          boardArray[i][j],
-          MoveType::Normal
-        });
       }
       if (boardArray[i][j] == 'r' || boardArray[i][j] == 'R') {
         for (int k = 0; k < 8; k++) {
