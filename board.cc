@@ -116,7 +116,7 @@ bool Board::baseCheckValidity(Move move) {
     if ((originPiece == 'Q' || originPiece == 'q') && !(horizontal == vertical || horizontal == 0 || vertical == 0)) return false;
     if ((originPiece == 'R' || originPiece == 'r') && !(horizontal == 0 || vertical == 0)) return false;
     if ((originPiece == 'B' || originPiece == 'b') && !(horizontal == vertical)) return false;
-    if ((originPiece == 'H' || originPiece == 'h') && !((horizontal == 2 && vertical == 1) || (horizontal == 1 && vertical == 2))) return false;
+    if ((originPiece == 'N' || originPiece == 'n') && !((horizontal == 2 && vertical == 1) || (horizontal == 1 && vertical == 2))) return false;
 
     return true;
 }
