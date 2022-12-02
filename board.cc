@@ -95,7 +95,7 @@ bool Board::baseCheckValidity(Move move) {
     int originX = move.originSquareX;
     int originY = move.originSquareY;
 
-    if (!(dstX > 0 && dstX < board.front().size() && dstY > 0 && dstY < board.size())) 
+    if (!(dstX >= 0 && dstX < 8 && dstY >= 0 && dstY < 8)) 
         return false;
 
     char originPiece = board.at(originY).at(originX);
