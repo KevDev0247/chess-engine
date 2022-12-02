@@ -15,6 +15,11 @@ public:
     virtual ~PieceMoveGen();
 };
 
+class KnightMoveGen : public PieceMoveGen {
+    using PieceMoveGen::PieceMoveGen;
+    std::vector<Move> getMoves() override;
+};
+
 class KingMoveGen : public PieceMoveGen {
     using PieceMoveGen::PieceMoveGen;
     std::vector<Move> getMoves() override;
