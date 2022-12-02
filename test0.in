@@ -1,0 +1,13 @@
+setup
++ R a8
++ p e1
++ P f5
+done
+game human human
+move a8 a2
+move e1 e3
+move a2 a8
+move e3 e4
+move a8 e8
+move e4 f5
+move e8 a8

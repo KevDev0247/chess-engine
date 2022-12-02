@@ -11,7 +11,7 @@
 using namespace std;
 
 void humanMove(string origin, string dest, Board* board) {
-    cout << origin[1] << " " << origin[0] << " " << dest[1] << " " << dest[0] << endl;
+    // cout << origin[1] << " " << origin[0] << " " << dest[1] << " " << dest[0] << endl;
 
     int originX = origin[0] - 'a';
     int originY = origin[1] - '1';
@@ -20,7 +20,7 @@ void humanMove(string origin, string dest, Board* board) {
     int destY = dest[1] - '1';
     destY = 7 - destY;
 
-    cout << originY << " " << originX << endl;
+    // cout << originY << " " << originX << endl;
 
     char piece = board->getBoard().at(originY).at(originX);
 
@@ -55,6 +55,64 @@ void computerMove(Computer *computer, Board *board) {
     board->notifyDisplays();
 }
 
+void initializeBoard(Board *board) {
+    // vector<vector<char>> boardArray = board->getBoard();
+
+    // vector<char> &blackPawns = boardArray.at(1);
+    // vector<char> &whitePawns = boardArray.at(6);
+    // for (auto &pawn : blackPawns) pawn = 'p';
+    // for (auto &pawn : whitePawns) pawn = 'P';
+
+    // boardArray.at(0).at(0) = 'r';
+    // boardArray.at(0).at(7) = 'r';
+    // boardArray.at(7).at(0) = 'R';
+    // boardArray.at(7).at(7) = 'R';
+    
+    // boardArray.at(0).at(1) = 'n';
+    // boardArray.at(0).at(6) = 'n';
+    // boardArray.at(7).at(1) = 'N';
+    // boardArray.at(7).at(6) = 'N';
+
+    // boardArray.at(0).at(2) = 'b';
+    // boardArray.at(0).at(5) = 'b';
+    // boardArray.at(7).at(2) = 'B';
+    // boardArray.at(7).at(5) = 'B';
+
+    // boardArray.at(0).at(3) = 'q';
+    // boardArray.at(0).at(4) = 'k';
+    // boardArray.at(7).at(3) = 'Q';
+    // boardArray.at(7).at(4) = 'K';
+
+    // board->setWhitePlaying(true);
+
+    for (int i = 0; i < 8; i++) {
+        board->setPieceOnBoard(1, i, 'p');
+        board->setPieceOnBoard(6, i, 'P');
+    }
+
+    board->setPieceOnBoard(0, 0, 'r');
+    board->setPieceOnBoard(0, 7, 'r');
+    board->setPieceOnBoard(7, 0, 'R');
+    board->setPieceOnBoard(7, 7, 'R');
+
+    board->setPieceOnBoard(0, 1, 'n');
+    board->setPieceOnBoard(0, 6, 'n');
+    board->setPieceOnBoard(7, 1, 'N');
+    board->setPieceOnBoard(7, 6, 'N');
+
+    board->setPieceOnBoard(0, 2, 'b');
+    board->setPieceOnBoard(0, 5, 'b');
+    board->setPieceOnBoard(7, 2, 'B');
+    board->setPieceOnBoard(7, 5, 'B');
+
+    board->setPieceOnBoard(0, 3, 'q');
+    board->setPieceOnBoard(0, 4, 'k');
+    board->setPieceOnBoard(7, 3, 'Q');
+    board->setPieceOnBoard(7, 4, 'K');
+
+    board->setWhitePlaying(true);
+}
+
 int main() {
     string input;
     // Can encapsulate all of this information in the Game class for better style
@@ -80,6 +138,8 @@ int main() {
             string command;
             ss >> command;
             if (command == "game") {
+                initializeBoard(board);
+
                 ss >> whiteType >> blackType;
                 
                 // parse level and reset type to "computer"
@@ -145,17 +205,18 @@ int main() {
                         string piece, location;
                         ssSetup >> piece >> location;
 
-                        int x = location[1] - 'a';
-                        int y = (int)location[0];
-                        board->setPieceOnBoard(x, y, piece[0]);
+                        int x = location[0] - 'a';
+                        int y = 7 - (location[1] - '1');
+
+                        board->setPieceOnBoard(y, x, piece[0]);
                     }
                     if (action == "-") {
                         string location;
                         ssSetup >> location;
 
-                        int x = location[1] - 'a';
-                        int y = (int)location[0];
-                        board->removePiece(x, y);
+                        int x = location[0] - 'a';
+                        int y = 7 - (location[1] - '1');
+                        board->removePiece(y, x);
                     }
                     if (action == "=") {
                         string colour;
@@ -164,7 +225,10 @@ int main() {
                         if (colour == "B") board->setWhitePlaying(false);
                         if (colour == "W") board->setWhitePlaying(true);
                     }
-                    if (action == "done") break;
+                    if (action == "done") {
+                        board->notifyDisplays();
+                        break;
+                    }
                 }              
             }
         }

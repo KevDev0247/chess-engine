@@ -12,33 +12,6 @@ Board::Board() {
         }
         board.push_back(row);
     }
-
-    vector<char> &blackPawns = board.at(1);
-    vector<char> &whitePawns = board.at(6);
-    for (auto &pawn : blackPawns) pawn = 'p';
-    for (auto &pawn : whitePawns) pawn = 'P';
-
-    board.at(0).at(0) = 'r';
-    board.at(0).at(7) = 'r';
-    board.at(7).at(0) = 'R';
-    board.at(7).at(7) = 'R';
-    
-    board.at(0).at(1) = 'n';
-    board.at(0).at(6) = 'n';
-    board.at(7).at(1) = 'N';
-    board.at(7).at(6) = 'N';
-
-    board.at(0).at(2) = 'b';
-    board.at(0).at(5) = 'b';
-    board.at(7).at(2) = 'B';
-    board.at(7).at(5) = 'B';
-
-    board.at(0).at(3) = 'q';
-    board.at(0).at(4) = 'k';
-    board.at(7).at(3) = 'Q';
-    board.at(7).at(4) = 'K';
-
-    whitePlaying = true;
 }
 
 void Board::setPieceMoveGen(PieceMoveGen *moveGen) {

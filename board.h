@@ -9,11 +9,11 @@ class PieceMoveGen;
 class Display;
 
 class Board {
+    PieceMoveGen *moveGen;
+    std::vector<Display*> displays;
     std::vector<std::vector<char>> board;
     bool canCastleWhite;
     bool whitePlaying;
-    std::vector<Display*> displays;
-    PieceMoveGen *moveGen;
 
     public:
         Board();
