@@ -26,6 +26,7 @@ class Board {
         bool setPieceOnBoard(int row, int col, char piece);
         void removePiece(int row, int col);
         bool executeMove(Move move);
+        void switchSide();
 
         std::vector<std::vector<char>> getBoard();
         std::vector<Move> getMoves();

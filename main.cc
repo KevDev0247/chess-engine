@@ -4,6 +4,9 @@
 #include "board.h"
 #include "human.h"
 #include "computer.h"
+#include "levelOne.h"
+#include "levelTwo.h"
+#include "levelThree.h"
 using namespace std;
 
 int main() {
@@ -15,6 +18,8 @@ int main() {
     string turn = "White";
     int whiteScore = 0, blackscore = 0;
     bool humanVsComputer = false;
+    Computer *computer;
+    int level;
     
     while (!cin.eof()) {
         getline(cin, input);
@@ -27,15 +32,34 @@ int main() {
             ss >> command;
             if (command == "game") {
                 ss >> whiteType >> blackType;
+                
                 if (whiteType == "computer" && blackType == "computer") {
-                    // separate control logic, doesn't go thru move command
+                    // computer vs computer has separate control logic, doesn't go thru move command
+                    // TODO computer vs computer
                 }
+                // parse level and reset type to "computer"
+                if (whiteType != "human") {
+                    level = whiteType[9] - '0';
+                    whiteType = "computer";
+                }
+                if (blackType != "human") {
+                    level = whiteType[9] - '0';
+                    blackType = "computer";
+                }
+                // instantiate computer based on the input level
+                if (level == 1) computer = new LevelOne(board);
+                if (level == 2) computer = new LevelTwo(board);
+                if (level == 3) computer = new LevelThree(board);
+
                 if (whiteType == "computer" && blackType == "human") {
-                    // computer make a move here, logic here
+                    // computer make a move right after creation, since computer is white and goes first
+                    Move newMove = computer->getMove();
+                    board->executeMove(newMove);
+                    board->switchSide();
                     humanVsComputer = true;
                 }
                 if (whiteType == "human" && blackType == "computer") {
-                    // human make a move first, which is below
+                    // human make a move first when move command, since human is white and goes first
                     humanVsComputer = true;
                 }
             }
@@ -70,36 +94,17 @@ int main() {
                     MoveType::Normal
                 });
                 if (success) {
-                    if (board->getWhitePlaying()) 
-                        board->setWhitePlaying(false);
-                    else 
-                        board->setWhitePlaying(true);
-
+                    // if human move successful, switch side on board
+                    // computer make a move after human made a move
+                    board->switchSide();
                     if (humanVsComputer) {
-                        // computer make a move here
+                        Move newMove = computer->getMove();
+                        board->executeMove(newMove);
+                        board->switchSide();
                     }
                 } else {
                     cout << "bad move" << endl;
                 }
-
-                // if (turn == "White") {
-                //     if (whiteType == "human") {
-                        
-                //         // debugging for now
-                //     } else {
-                //         // getMove from computer level
-                //     }
-                //     turn = "Black";
-                // } else {
-                //     if (blackType == "human") {
-                //         string start;
-                //         string end;
-                //         ss >> start >> end;
-                //     } else {
-                //         // getMove from computer level
-                //     }
-                //     turn = "White";
-                // }
             }
             if (command == "setup") {
                 while (!cin.eof()) {

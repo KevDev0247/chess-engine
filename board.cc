@@ -23,6 +23,13 @@ bool Board::setPieceOnBoard(int row, int col, char piece) {
     board.at(row).at(col) = piece;
 }
 
+void Board::switchSide() {
+    if (getWhitePlaying()) 
+        setWhitePlaying(false);
+    else 
+        setWhitePlaying(true);
+}
+
 // first assume valid input, add checks later
 void Board::removePiece(int row, int col) {
     board.at(row).at(col) = '-';

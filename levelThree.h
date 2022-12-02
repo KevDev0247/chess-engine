@@ -5,7 +5,7 @@
 #include "move.h"
 #include "board.h"
 
-class LevelThree : Computer {
+class LevelThree : public Computer {
     public:
         LevelThree(Board *board) : Computer{board} {};
 

@@ -8,7 +8,7 @@ public:
     Computer(Board *board) : Player{board} {};
     bool baseCheckLevelTwo(Move move);
     bool baseCheckLevelThree(Move move);
-    virtual Move getMove() = 0;
+    virtual Move getMove();
 };
 
 #endif
