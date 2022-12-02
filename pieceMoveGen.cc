@@ -323,6 +323,7 @@ vector<Move> KingMoveGen::getMoves() {
         // else secondQuadrant = j;
 
         int m = j, k = i;
+
         while (k > 0 && m < 8) {
           if (k != j) 
             newMoves.push_back({
@@ -337,7 +338,7 @@ vector<Move> KingMoveGen::getMoves() {
            m++; k--;
         }
 
-        int m = j, k = i;
+        m = j, k = i;
         while (k > 0 && m > 0) {
           if (k != j) 
             newMoves.push_back({
@@ -352,7 +353,7 @@ vector<Move> KingMoveGen::getMoves() {
            m--; k--;
         }
 
-        int m = j, k = i;
+        m = j, k = i;
         while (k < 8 && m > 0) {
           if (k != j) 
             newMoves.push_back({
@@ -367,7 +368,7 @@ vector<Move> KingMoveGen::getMoves() {
            m--; k++;
         }
 
-        int m = j, k = i;
+        m = j, k = i;
         while (k < 8 && m < 8) {
           if (k != j) 
             newMoves.push_back({
@@ -425,7 +426,7 @@ vector<Move> KingMoveGen::getMoves() {
            m++; k--;
         }
 
-        int m = j, k = i;
+        m = j, k = i;
         while (k > 0 && m > 0) {
           if (k != j) 
             newMoves.push_back({
@@ -440,7 +441,7 @@ vector<Move> KingMoveGen::getMoves() {
            m--; k--;
         }
 
-        int m = j, k = i;
+        m = j, k = i;
         while (k < 8 && m > 0) {
           if (k != j) 
             newMoves.push_back({
@@ -455,7 +456,7 @@ vector<Move> KingMoveGen::getMoves() {
            m--; k++;
         }
 
-        int m = j, k = i;
+        m = j, k = i;
         while (k < 8 && m < 8) {
           if (k != j) 
             newMoves.push_back({

@@ -2,6 +2,8 @@
 #define DISPLAY_H
 #include "board.h"
 
+class Board;
+
 class Display {
 protected:
     Board *board;

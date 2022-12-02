@@ -4,6 +4,8 @@
 #include "move.h"
 #include "board.h"
 
+class Board;
+
 class Player {
 protected:
     Board *board;

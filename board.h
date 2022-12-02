@@ -6,6 +6,7 @@
 #include "display.h"
 
 class PieceMoveGen;
+class Display;
 
 class Board {
     std::vector<std::vector<char>> board;
