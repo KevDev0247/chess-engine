@@ -6,6 +6,8 @@
 #include "board.h"
 #include "moveGen.h"
 
+using namespace std;
+
 class PieceMoveGen : public MoveGen {
 protected:
     MoveGen *next;

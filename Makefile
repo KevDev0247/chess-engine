@@ -5,7 +5,7 @@ OBJECTS = move.o player.o display.o board.o human.o computer.o pieceMoveGen.o le
 DEPENDS = ${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}
-	${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXEC} -lX11
+	${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXEC} # -lX11
 
 -include ${DEPENDS}
 
