@@ -99,25 +99,6 @@ vector<Move> KnightMoveGen::getMoves() {
   return result;
 }
 
-vector<Move> genRookMoves(
-  vector<vector<char>> &boardArray,
-  int y,
-  int x
-) {
-  vector<Move> result;
-
-  bool whitePiece = isupper(boardArray[y][x]);
-
-  // up
-  for (int i = y; i >= 0; i--) {
-    if (whitePiece && isupper(boardArray[i][x])) {
-      break;
-    }
-  }
-
-  return result;
-}
-
 
 vector<Move> RookMoveGen::getMoves() {
   vector<Move> result = next->getMoves();
@@ -126,7 +107,56 @@ vector<Move> RookMoveGen::getMoves() {
   vector<Move> newMoves;
   for (int i = 0; i < 8; i++) {
     for (int j = 0; j < 8; j++) {
+      if ((white && boardArray[i][j] == 'R') ||
+        (!white && boardArray[i][j] == 'r')) {
+        genRookMoves(boardArray, i, j, newMoves);
+      }
+    }
+  }
 
+  for (auto &i : newMoves) {
+    if (board->baseCheckValidity(i)) {
+      result.push_back(i);
+    }
+  }
+  return result;
+}
+
+
+vector<Move> BishopMoveGen::getMoves() {
+  vector<Move> result = next->getMoves();
+  auto boardArray = board->getBoard();
+  bool white = board->getWhitePlaying();
+  vector<Move> newMoves;
+  for (int i = 0; i < 8; i++) {
+    for (int j = 0; j < 8; j++) {
+      if ((white && boardArray[i][j] == 'B') ||
+        (!white && boardArray[i][j] == 'b')) {
+        genBishopMoves(boardArray, i, j, newMoves);
+      }
+    }
+  }
+
+  for (auto &i : newMoves) {
+    if (board->baseCheckValidity(i)) {
+      result.push_back(i);
+    }
+  }
+  return result;
+}
+
+vector<Move> QueenMoveGen::getMoves() {
+  vector<Move> result = next->getMoves();
+  auto boardArray = board->getBoard();
+  bool white = board->getWhitePlaying();
+  vector<Move> newMoves;
+  for (int i = 0; i < 8; i++) {
+    for (int j = 0; j < 8; j++) {
+      if ((white && boardArray[i][j] == 'Q') ||
+        (!white && boardArray[i][j] == 'q')) {
+        genRookMoves(boardArray, i, j, newMoves);
+        genBishopMoves(boardArray, i, j, newMoves);
+      }
     }
   }
 
@@ -311,203 +341,6 @@ vector<Move> KingMoveGen::getMoves() {
           MoveType::Normal
         });
       }
-      
-      if (boardArray[i][j] == 'p' || boardArray[i][j] == 'P') {
-        newMoves.push_back({
-          j,
-          i,
-          j + 1,
-          i,
-          ' ',
-          boardArray[i][j],
-          MoveType::Normal
-        });
-      }
-      if (boardArray[i][j] == 'r' || boardArray[i][j] == 'R') {
-        for (int k = 0; k < 8; k++) {
-          if (k != j) 
-            newMoves.push_back({
-              j,
-              i,
-              k,
-              i,
-              ' ',
-              boardArray[i][j],
-              MoveType::Normal
-            });          
-        }
-        for (int k = 0; k < 8; k++) {
-          if (k != i)
-            newMoves.push_back({
-              j,
-              i,
-              j,
-              k,
-              ' ',
-              boardArray[i][j],
-              MoveType::Normal
-            });          
-        }
-      }
-      if (boardArray[i][j] == 'b' || boardArray[i][j] == 'B') {
-        // int firstQuadrant, secondQuadrant, thirdQuadrant, fourthQuadrant;
-        // if (8 - j > i) firstQuadrant = j;
-        // else firstQuadrant = 8 - i;
-        // if (i > j) secondQuadrant = j;
-        // else secondQuadrant = i;
-        // if (8 - i > 8 - j) secondQuadrant = 8 - j;
-        // else secondQuadrant = 8 - i;
-        // if (8 - i > j) secondQuadrant = 8 - i;
-        // else secondQuadrant = j;
-
-        m = j, k = i;
-        while (k > 0 && m < 8) {
-          if (k != j) 
-            newMoves.push_back({
-              j,
-              i,
-              m,
-              k,
-              ' ',
-              boardArray[i][j],
-              MoveType::Normal
-            }); 
-           m++; k--;
-        }
-
-        m = j, k = i;
-        while (k > 0 && m > 0) {
-          if (k != j) 
-            newMoves.push_back({
-              j,
-              i,
-              m,
-              k,
-              ' ',
-              boardArray[i][j],
-              MoveType::Normal
-            }); 
-           m--; k--;
-        }
-
-        m = j, k = i;
-        while (k < 8 && m > 0) {
-          if (k != j) 
-            newMoves.push_back({
-              j,
-              i,
-              m,
-              k,
-              ' ',
-              boardArray[i][j],
-              MoveType::Normal
-            }); 
-           m--; k++;
-        }
-
-        m = j, k = i;
-        while (k < 8 && m < 8) {
-          if (k != j) 
-            newMoves.push_back({
-              j,
-              i,
-              m,
-              k,
-              ' ',
-              boardArray[i][j],
-              MoveType::Normal
-            }); 
-           m++; k++;
-        }
-      }
-      if (boardArray[i][j] == 'q' || boardArray[i][j] == 'Q') {
-        // horizontal and vertical moves
-        for (int k = 0; k < 8; k++) {
-          if (k != j) 
-            newMoves.push_back({
-              j,
-              i,
-              k,
-              i,
-              ' ',
-              boardArray[i][j],
-              MoveType::Normal
-            });          
-        }
-        for (int k = 0; k < 8; k++) {
-          if (k != i)
-            newMoves.push_back({
-              j,
-              i,
-              j,
-              k,
-              ' ',
-              boardArray[i][j],
-              MoveType::Normal
-            });          
-        }
-
-        // diagonal moves
-        m = j, k = i;
-        while (k > 0 && m < 8) {
-          if (k != j) 
-            newMoves.push_back({
-              j,
-              i,
-              m,
-              k,
-              ' ',
-              boardArray[i][j],
-              MoveType::Normal
-            }); 
-           m++; k--;
-        }
-
-        m = j, k = i;
-        while (k > 0 && m > 0) {
-          if (k != j) 
-            newMoves.push_back({
-              j,
-              i,
-              m,
-              k,
-              ' ',
-              boardArray[i][j],
-              MoveType::Normal
-            }); 
-           m--; k--;
-        }
-
-        m = j, k = i;
-        while (k < 8 && m > 0) {
-          if (k != j) 
-            newMoves.push_back({
-              j,
-              i,
-              m,
-              k,
-              ' ',
-              boardArray[i][j],
-              MoveType::Normal
-            }); 
-           m--; k++;
-        }
-
-        m = j, k = i;
-        while (k < 8 && m < 8) {
-          if (k != j) 
-            newMoves.push_back({
-              j,
-              i,
-              m,
-              k,
-              ' ',
-              boardArray[i][j],
-              MoveType::Normal
-            }); 
-           m++; k++;
-        }
-      }
     }
   }
 
@@ -517,4 +350,127 @@ vector<Move> KingMoveGen::getMoves() {
     }
   }
   return result;
+}
+
+
+void genRookMoves(
+  vector<vector<char>> &boardArray,
+  int y,
+  int x,
+  vector<Move> &result
+) {
+
+  bool whitePiece = isupper(boardArray[y][x]);
+
+  // up
+  for (int i = y; i >= 0; i--) {
+    if (whitePiece && isupper(boardArray[i][x])) {
+      break;
+    }
+
+    if (!whitePiece && islower(boardArray[i][x])) {
+      break;
+    }
+
+    result.push_back({
+      y,
+      x,
+      i,
+      x,
+      ' ',
+      boardArray[y][x],
+      MoveType::Normal
+    });
+
+    if (whitePiece && islower(boardArray[i][x])) {
+      break;
+    }
+    if (!whitePiece && isupper(boardArray[i][x])) {
+      break;
+    }
+  }
+
+  // down
+  for (int i = y; i < 8; i++) {
+    if (whitePiece && isupper(boardArray[i][x])) {
+      break;
+    }
+
+    if (!whitePiece && islower(boardArray[i][x])) {
+      break;
+    }
+
+    result.push_back({
+      y,
+      x,
+      i,
+      x,
+      ' ',
+      boardArray[y][x],
+      MoveType::Normal
+    });
+
+    if (whitePiece && islower(boardArray[i][x])) {
+      break;
+    }
+    if (!whitePiece && isupper(boardArray[i][x])) {
+      break;
+    }
+
+  }
+  // left
+  for (int j = x; j >= 0; j--) {
+    if (whitePiece && isupper(boardArray[y][j])) {
+      break;
+    }
+
+    if (!whitePiece && islower(boardArray[y][j])) {
+      break;
+    }
+
+    result.push_back({
+      y,
+      x,
+      y,
+      j,
+      ' ',
+      boardArray[y][j],
+      MoveType::Normal
+    });
+
+    if (whitePiece && islower(boardArray[y][j])) {
+      break;
+    }
+    if (!whitePiece && isupper(boardArray[y][j])) {
+      break;
+    }
+  }
+
+  // right
+  for (int j = x; j < 8; j++) {
+    if (whitePiece && isupper(boardArray[y][j])) {
+      break;
+    }
+
+    if (!whitePiece && islower(boardArray[y][j])) {
+      break;
+    }
+
+    result.push_back({
+      y,
+      x,
+      y,
+      j,
+      ' ',
+      boardArray[y][j],
+      MoveType::Normal
+    });
+
+    if (whitePiece && islower(boardArray[y][j])) {
+      break;
+    }
+    if (!whitePiece && isupper(boardArray[y][j])) {
+      break;
+    }
+  }
 }

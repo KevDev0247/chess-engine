@@ -36,4 +36,30 @@ class RookMoveGen : public PieceMoveGen {
     std::vector<Move> getMoves() override;
 };
 
+
+class BishopMoveGen : public PieceMoveGen {
+    using PieceMoveGen::PieceMoveGen;
+    std::vector<Move> getMoves() override;
+};
+
+
+class QueenMoveGen : public PieceMoveGen {
+    using PieceMoveGen::PieceMoveGen;
+    std::vector<Move> getMoves() override;
+};
+
+void genRookMoves(
+  vector<vector<char>> &boardArray,
+  int y,
+  int x,
+  vector<Move> &result
+);
+
+void genBishopMoves(
+  vector<vector<char>> &boardArray,
+  int y,
+  int x,
+  vector<Move> &result
+);
+
 #endif
