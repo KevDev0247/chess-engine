@@ -9,6 +9,38 @@
 #include "levelThree.h"
 using namespace std;
 
+void humanMove(string origin, string dest, Board* board) {
+    int originX = origin[1] - 'a';
+    int originY = (int)origin[0];
+    int destX = dest[1] - 'a';
+    int destY = (int)dest[0];
+    char piece = board->getBoard().at(originY).at(originX);
+
+    bool success = board->executeMove({
+        originX,
+        originY,
+        destX,
+        destY,
+        ' ',
+        piece,
+        MoveType::Normal
+    });
+
+    // if human move successful, switch side on board
+    // else debugging for now
+    if (success) {
+        board->switchSide();
+    } else {
+        cout << "bad move" << endl;
+    }
+}
+
+void computerMove(Computer *computer, Board *board) {
+    Move newMove = computer->getMove();
+    board->executeMove(newMove);
+    board->switchSide();
+}
+
 int main() {
     string input;
     // Can encapsulate all of this information in the Game class for better style
@@ -33,10 +65,6 @@ int main() {
             if (command == "game") {
                 ss >> whiteType >> blackType;
                 
-                if (whiteType == "computer" && blackType == "computer") {
-                    // computer vs computer has separate control logic, doesn't go thru move command
-                    // TODO computer vs computer
-                }
                 // parse level and reset type to "computer"
                 if (whiteType != "human") {
                     level = whiteType[9] - '0';
@@ -53,9 +81,6 @@ int main() {
 
                 if (whiteType == "computer" && blackType == "human") {
                     // computer make a move right after creation, since computer is white and goes first
-                    Move newMove = computer->getMove();
-                    board->executeMove(newMove);
-                    board->switchSide();
                     humanVsComputer = true;
                 }
                 if (whiteType == "human" && blackType == "computer") {
@@ -74,36 +99,30 @@ int main() {
                 }
             }
             if (command == "move") {
-                string origin;
-                string dest;
-                ss >> origin >> dest;
-                
-                int originX = origin[1] - 'a';
-                int originY = (int)origin[0];
-                int destX = dest[1] - 'a';
-                int destY = (int)dest[0];
-                char piece = board->getBoard().at(originY).at(originX);
-
-                bool success = board->executeMove({
-                    originX,
-                    originY,
-                    destX,
-                    destY,
-                    ' ',
-                    piece,
-                    MoveType::Normal
-                });
-                if (success) {
-                    // if human move successful, switch side on board
-                    // computer make a move after human made a move
-                    board->switchSide();
-                    if (humanVsComputer) {
-                        Move newMove = computer->getMove();
-                        board->executeMove(newMove);
-                        board->switchSide();
+                if (board->getWhitePlaying()) {
+                    if (whiteType == "human") {
+                        // Human input a move and execute it
+                        string origin;
+                        string dest;
+                        ss >> origin >> dest;
+                        humanMove(origin, dest, board);
+                    } else {
+                        // Computer generate a move and execute it
+                        computerMove(computer, board);
                     }
+                    turn = "Black";
                 } else {
-                    cout << "bad move" << endl;
+                    if (blackType == "human") {
+                        // Human input a move and execute it
+                        string origin;
+                        string dest;
+                        ss >> origin >> dest;
+                        humanMove(origin, dest, board);
+                    } else {
+                        // Computer generate a move and execute it
+                        computerMove(computer, board);
+                    }
+                    turn = "White";
                 }
             }
             if (command == "setup") {
