@@ -9,7 +9,7 @@ protected:
     Board *board;
 public:
     Display(Board *board);
-    virtual void notify();
+    virtual void notify() {};
     virtual ~Display() {};
 };
 
