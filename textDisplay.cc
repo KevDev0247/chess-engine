@@ -3,6 +3,8 @@
 
 using namespace std;
 
+TextDisplay::TextDisplay(Board *board) : Display{board} {}
+
 void TextDisplay::notify() {
   std::vector<std::vector<char>> pieces = board->getBoard();
   for (int i = 0; i < 8; i++) {

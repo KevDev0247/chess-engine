@@ -2,6 +2,6 @@
 
 class TextDisplay : public Display {
   public:
-    TextDisplay(Board *board) : Display{board} {};
+    TextDisplay(Board *board);
     void notify() override;
 };

@@ -59,7 +59,7 @@ void Board::switchSide() {
 
 // first assume valid input, add checks later
 void Board::removePiece(int row, int col) {
-    board.at(row).at(col) = '-';
+    board.at(row).at(col) = ' ';
 }
 
 void Board::setWhitePlaying(bool isWhitePlaying) {
