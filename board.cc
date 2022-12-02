@@ -7,7 +7,7 @@ Board::Board() {
     for (int i = 0; i < 8; i++) {
         vector<char> row;
         for (int i = 0; i < 8; i++) {
-            row.push_back('-');
+            row.push_back(' ');
         }
         board.push_back(row);
     }
@@ -66,13 +66,9 @@ void Board::setWhitePlaying(bool isWhitePlaying) {
     whitePlaying = isWhitePlaying;
 }
 
-bool Board::executeMove(Move move) {
-    if (baseCheckValidity(move)) {
-        board.at(move.dstSquareY).at(move.dstSquareX) = move.piece;
-        board.at(move.originSquareY).at(move.originSquareX) = '-';
-        return true;
-    }
-    return false;
+void Board::executeMove(Move move) {
+    board.at(move.dstSquareY).at(move.dstSquareX) = move.piece;
+    board.at(move.originSquareY).at(move.originSquareX) = ' ';
 }
 
 std::vector<Move> Board::getMoves() {

@@ -26,7 +26,7 @@ class Board {
         void setWhitePlaying(bool whitePlaying);
         bool setPieceOnBoard(int row, int col, char piece);
         void removePiece(int row, int col);
-        bool executeMove(Move move);
+        void executeMove(Move move);
         void switchSide();
 
         std::vector<std::vector<char>> getBoard();

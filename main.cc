@@ -17,7 +17,7 @@ void humanMove(string origin, string dest, Board* board) {
     int destY = (int)dest[0];
     char piece = board->getBoard().at(originY).at(originX);
 
-    bool success = board->executeMove({
+    Move newMove = {
         originX,
         originY,
         destX,
@@ -25,11 +25,13 @@ void humanMove(string origin, string dest, Board* board) {
         ' ',
         piece,
         MoveType::Normal
-    });
+    };
+    bool success = board->baseCheckValidity(newMove);
 
     // if human move successful, switch side on board
     // else debugging for now
     if (success) {
+        board->executeMove(newMove);
         board->switchSide();
     } else {
         cout << "bad move" << endl;
@@ -49,7 +51,6 @@ int main() {
     string blackType;
     string turn = "White";
     int whiteScore = 0, blackscore = 0;
-    bool humanVsComputer = false;
 
     Board *board = new Board();
     TextDisplay *textDisplay = new TextDisplay(board);
@@ -81,15 +82,6 @@ int main() {
                 if (level == 1) computer = new LevelOne(board);
                 if (level == 2) computer = new LevelTwo(board);
                 if (level == 3) computer = new LevelThree(board);
-
-                if (whiteType == "computer" && blackType == "human") {
-                    // computer make a move right after creation, since computer is white and goes first
-                    humanVsComputer = true;
-                }
-                if (whiteType == "human" && blackType == "computer") {
-                    // human make a move first when move command, since human is white and goes first
-                    humanVsComputer = true;
-                }
             }
             if (command == "resign") {
                 if (turn == "White") {
