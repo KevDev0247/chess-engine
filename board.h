@@ -16,6 +16,7 @@ class Board {
 
     public:
         Board();
+        ~Board();
 
         void displayBoard();
         void attachDisplay(Display* display);
