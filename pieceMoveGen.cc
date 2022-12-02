@@ -352,6 +352,43 @@ vector<Move> KingMoveGen::getMoves() {
   return result;
 }
 
+bool addLinearMove(
+  vector<vector<char>> &boardArray,
+  int y,
+  int x,
+  int i,
+  int j,
+  bool whitePiece,
+  vector<Move> &result
+) {
+  if (whitePiece && isupper(boardArray[i][j])) {
+    return false;
+  }
+
+  if (!whitePiece && islower(boardArray[i][j])) {
+    return false;
+  }
+
+  result.push_back({
+    y,
+    x,
+    i,
+    j,
+    ' ',
+    boardArray[y][x],
+    MoveType::Normal
+  });
+
+  if (whitePiece && islower(boardArray[i][j])) {
+    return false;
+  }
+  if (!whitePiece && isupper(boardArray[i][j])) {
+    return false;
+  }
+
+  return true;
+}
+
 
 void genRookMoves(
   vector<vector<char>> &boardArray,
@@ -363,114 +400,54 @@ void genRookMoves(
   bool whitePiece = isupper(boardArray[y][x]);
 
   // up
-  for (int i = y; i >= 0; i--) {
-    if (whitePiece && isupper(boardArray[i][x])) {
-      break;
-    }
-
-    if (!whitePiece && islower(boardArray[i][x])) {
-      break;
-    }
-
-    result.push_back({
-      y,
-      x,
-      i,
-      x,
-      ' ',
-      boardArray[y][x],
-      MoveType::Normal
-    });
-
-    if (whitePiece && islower(boardArray[i][x])) {
-      break;
-    }
-    if (!whitePiece && isupper(boardArray[i][x])) {
-      break;
-    }
+  for (int i = y - 1; i >= 0; i--) {
+    if (!addLinearMove(boardArray, y, x, i, x, whitePiece, result)) break;
   }
 
   // down
-  for (int i = y; i < 8; i++) {
-    if (whitePiece && isupper(boardArray[i][x])) {
-      break;
-    }
-
-    if (!whitePiece && islower(boardArray[i][x])) {
-      break;
-    }
-
-    result.push_back({
-      y,
-      x,
-      i,
-      x,
-      ' ',
-      boardArray[y][x],
-      MoveType::Normal
-    });
-
-    if (whitePiece && islower(boardArray[i][x])) {
-      break;
-    }
-    if (!whitePiece && isupper(boardArray[i][x])) {
-      break;
-    }
+  for (int i = y + 1; i < 8; i++) {
+    if (!addLinearMove(boardArray, y, x, i, x, whitePiece, result)) break;
 
   }
   // left
-  for (int j = x; j >= 0; j--) {
-    if (whitePiece && isupper(boardArray[y][j])) {
-      break;
-    }
-
-    if (!whitePiece && islower(boardArray[y][j])) {
-      break;
-    }
-
-    result.push_back({
-      y,
-      x,
-      y,
-      j,
-      ' ',
-      boardArray[y][j],
-      MoveType::Normal
-    });
-
-    if (whitePiece && islower(boardArray[y][j])) {
-      break;
-    }
-    if (!whitePiece && isupper(boardArray[y][j])) {
-      break;
-    }
+  for (int j = x - 1; j >= 0; j--) {
+    if (!addLinearMove(boardArray, y, x, y, j, whitePiece, result)) break;
   }
 
   // right
-  for (int j = x; j < 8; j++) {
-    if (whitePiece && isupper(boardArray[y][j])) {
-      break;
-    }
+  for (int j = x + 1; j < 8; j++) {
+    if (!addLinearMove(boardArray, y, x, y, j, whitePiece, result)) break;
+  }
+}
 
-    if (!whitePiece && islower(boardArray[y][j])) {
-      break;
-    }
 
-    result.push_back({
-      y,
-      x,
-      y,
-      j,
-      ' ',
-      boardArray[y][j],
-      MoveType::Normal
-    });
 
-    if (whitePiece && islower(boardArray[y][j])) {
-      break;
-    }
-    if (!whitePiece && isupper(boardArray[y][j])) {
-      break;
-    }
+void genBishopMoves(
+  vector<vector<char>> &boardArray,
+  int y,
+  int x,
+  vector<Move> &result
+) {
+
+  bool whitePiece = isupper(boardArray[y][x]);
+
+  // northwest
+  for (int i = y - 1, j = x - 1; i >= 0 && j >= 0; i--, j--) {
+    if (!addLinearMove(boardArray, y, x, i, j, whitePiece, result)) break;
+  }
+
+  // northeast
+  for (int i = y - 1, j = x + 1; i >= 0 && j < 8; i--, j++) {
+    if (!addLinearMove(boardArray, y, x, i, j, whitePiece, result)) break;
+  }
+
+  // southwest
+  for (int i = y + 1, j = x - 1; i < 8 && j >= 0; i++, j--) {
+    if (!addLinearMove(boardArray, y, x, i, j, whitePiece, result)) break;
+  }
+
+  // southeast
+  for (int i = y + 1, j = x + 1; i < 8 && j < 8; i++ j++) {
+    if (!addLinearMove(boardArray, y, x, i, j, whitePiece, result)) break;
   }
 }
