@@ -45,9 +45,16 @@ void Board::setPieceMoveGen(PieceMoveGen *moveGen) {
     this->moveGen = moveGen;
 }
 
-// first assume valid input, add checks later
 bool Board::setPieceOnBoard(int row, int col, char piece) {
     board.at(row).at(col) = piece;
+}
+
+void Board::attachDisplay(Display* display) {
+    displays.push_back(display);
+}
+
+void Board::notifyDisplays() {
+  for (auto display : displays) display->notify();
 }
 
 void Board::switchSide() {

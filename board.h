@@ -22,6 +22,7 @@ class Board {
         void displayBoard();
         void attachDisplay(Display* display);
         void detachDisplay(Display* display);
+        void notifyDisplays();
 
         void setPieceMoveGen(PieceMoveGen *moveGen);
         void setWhitePlaying(bool whitePlaying);

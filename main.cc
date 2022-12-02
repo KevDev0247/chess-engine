@@ -11,10 +11,15 @@
 using namespace std;
 
 void humanMove(string origin, string dest, Board* board) {
-    int originX = origin[1] - 'a';
-    int originY = (int)origin[0];
-    int destX = dest[1] - 'a';
-    int destY = (int)dest[0];
+    cout << origin[1] << " " << origin[0] << " " << dest[1] << " " << dest[0] << endl;
+
+    int originX = origin[0] - 'a';
+    int originY = origin[1] - '0';
+    int destX = dest[0] - 'a';
+    int destY = dest[1] - '0';
+
+    cout << originY << " " << originX << endl;
+
     char piece = board->getBoard().at(originY).at(originX);
 
     Move newMove = {
@@ -33,8 +38,11 @@ void humanMove(string origin, string dest, Board* board) {
     if (success) {
         board->executeMove(newMove);
         board->switchSide();
+        board->notifyDisplays();
     } else {
         cout << "bad move" << endl;
+        // debugging
+        board->notifyDisplays();
     }
 }
 
@@ -42,6 +50,7 @@ void computerMove(Computer *computer, Board *board) {
     Move newMove = computer->getMove();
     board->executeMove(newMove);
     board->switchSide();
+    board->notifyDisplays();
 }
 
 int main() {
@@ -56,6 +65,8 @@ int main() {
     TextDisplay *textDisplay = new TextDisplay(board);
     Computer *computer;
     int level;
+
+    board->attachDisplay(textDisplay);
     
     while (!cin.eof()) {
         getline(cin, input);
@@ -119,7 +130,6 @@ int main() {
                     }
                     turn = "White";
                 }
-                textDisplay->notify();
             }
             if (command == "setup") {
                 while (!cin.eof()) {
