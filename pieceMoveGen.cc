@@ -7,6 +7,184 @@ vector<Move> PieceMoveGen::getMoves() {
 
 PieceMoveGen::~PieceMoveGen() { delete next; }
 
+vector<Move> KnightMoveGen::getMoves() {
+  vector<Move> result = next->getMoves();
+  auto boardArray = board->getBoard();
+  bool white = board->getWhitePlaying();
+  vector<Move> newMoves;
+  for (int i = 0; i < 8; i++) {
+    for (int j = 0; j < 8; j++) {
+      if (boardArray[i][j] == 'h' || boardArray[i][j] == 'H') {
+        newMoves.push_back({
+          j,
+          i,
+          j + 1,
+          i + 2,
+          ' ',
+          boardArray[i][j],
+          MoveType::Normal
+        });
+        newMoves.push_back({
+          j,
+          i,
+          j + 2,
+          i + 1,
+          ' ',
+          boardArray[i][j],
+          MoveType::Normal
+        });
+        newMoves.push_back({
+          j,
+          i,
+          j - 1,
+          i - 2,
+          ' ',
+          boardArray[i][j],
+          MoveType::Normal
+        });
+        newMoves.push_back({
+          j,
+          i,
+          j - 2,
+          i - 1,
+          ' ',
+          boardArray[i][j],
+          MoveType::Normal
+        });
+        newMoves.push_back({
+          j,
+          i,
+          j - 1,
+          i + 2,
+          ' ',
+          boardArray[i][j],
+          MoveType::Normal
+        });
+        newMoves.push_back({
+          j,
+          i,
+          j - 2,
+          i + 1,
+          ' ',
+          boardArray[i][j],
+          MoveType::Normal
+        });
+        newMoves.push_back({
+          j,
+          i,
+          j + 1,
+          i - 2,
+          ' ',
+          boardArray[i][j],
+          MoveType::Normal
+        });
+        newMoves.push_back({
+          j,
+          i,
+          j + 2,
+          i - 1,
+          ' ',
+          boardArray[i][j],
+          MoveType::Normal
+        });
+      }
+    }
+  }
+
+  for (auto &i : newMoves) {
+    if (board->baseCheckValidity(i)) {
+      result.push_back(i);
+    }
+  }
+  return result;
+}
+
+
+vector<Move> PawnMoveGen::getMoves() {
+  vector<Move> result = next->getMoves();
+  auto boardArray = board->getBoard();
+  bool white = board->getWhitePlaying();
+  vector<Move> newMoves;
+  for (int i = 0; i < 8; i++) {
+    for (int j = 0; j < 8; j++) {
+      if (boardArray[i][j] == 'p') {
+        if (boardArray[i + 1][j] == ' ');
+        newMoves.push_back({
+          j,
+          i,
+          j,
+          i + 1,
+          ' ',
+          boardArray[i][j],
+          MoveType::Normal
+        });
+        if (isupper(boardArray[i + 1][j + 1])) {
+          newMoves.push_back({
+            j,
+            i,
+            j + 1,
+            i + 1,
+            ' ',
+            boardArray[i][j],
+            MoveType::Normal
+          });
+        }
+        if (isupper(boardArray[i + 1][j - 1])) {
+          newMoves.push_back({
+            j,
+            i,
+            j - 1,
+            i + 1,
+            ' ',
+            boardArray[i][j],
+            MoveType::Normal
+          });
+        }
+      } else if (boardArray[i][j] == 'P') {
+        if (boardArray[i - 1][j] == ' ');
+        newMoves.push_back({
+          j,
+          i,
+          j,
+          i - 1,
+          ' ',
+          boardArray[i][j],
+          MoveType::Normal
+        });
+        if (islower(boardArray[i - 1][j + 1])) {
+          newMoves.push_back({
+            j,
+            i,
+            j + 1,
+            i + 1,
+            ' ',
+            boardArray[i][j],
+            MoveType::Normal
+          });
+        }
+        if (islower(boardArray[i - 1][j - 1])) {
+          newMoves.push_back({
+            j,
+            i,
+            j - 1,
+            i - 1,
+            ' ',
+            boardArray[i][j],
+            MoveType::Normal
+          });
+        }
+      }
+    }
+  }
+
+  for (auto &i : newMoves) {
+    if (board->baseCheckValidity(i)) {
+      result.push_back(i);
+    }
+  }
+  return result;
+}
+
 vector<Move> KingMoveGen::getMoves() {
   vector<Move> result = next->getMoves();
   auto boardArray = board->getBoard();
@@ -95,80 +273,7 @@ vector<Move> KingMoveGen::getMoves() {
           MoveType::Normal
         });
       }
-      if (boardArray[i][j] == 'h' || boardArray[i][j] == 'H') {
-        newMoves.push_back({
-          j,
-          i,
-          j + 1,
-          i + 2,
-          ' ',
-          boardArray[i][j],
-          MoveType::Normal
-        });
-        newMoves.push_back({
-          j,
-          i,
-          j + 2,
-          i + 1,
-          ' ',
-          boardArray[i][j],
-          MoveType::Normal
-        });
-        newMoves.push_back({
-          j,
-          i,
-          j - 1,
-          i - 2,
-          ' ',
-          boardArray[i][j],
-          MoveType::Normal
-        });
-        newMoves.push_back({
-          j,
-          i,
-          j - 2,
-          i - 1,
-          ' ',
-          boardArray[i][j],
-          MoveType::Normal
-        });
-        newMoves.push_back({
-          j,
-          i,
-          j - 1,
-          i + 2,
-          ' ',
-          boardArray[i][j],
-          MoveType::Normal
-        });
-        newMoves.push_back({
-          j,
-          i,
-          j - 2,
-          i + 1,
-          ' ',
-          boardArray[i][j],
-          MoveType::Normal
-        });
-        newMoves.push_back({
-          j,
-          i,
-          j + 1,
-          i - 2,
-          ' ',
-          boardArray[i][j],
-          MoveType::Normal
-        });
-        newMoves.push_back({
-          j,
-          i,
-          j + 2,
-          i - 1,
-          ' ',
-          boardArray[i][j],
-          MoveType::Normal
-        });
-      }
+      
       if (boardArray[i][j] == 'p' || boardArray[i][j] == 'P') {
         newMoves.push_back({
           j,
