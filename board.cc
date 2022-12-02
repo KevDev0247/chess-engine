@@ -11,12 +11,11 @@ Board::Board() {
         }
         board.push_back(row);
     }
-    for (int i = 0; i < 8; i++) {
-        vector<char> blackPawns = board.at(1);
-        vector<char> whitePawns = board.at(6);
-        for (auto pawn : blackPawns) pawn = 'p';
-        for (auto pawn : whitePawns) pawn = 'P';
-    }
+
+    vector<char> &blackPawns = board.at(1);
+    vector<char> &whitePawns = board.at(6);
+    for (auto &pawn : blackPawns) pawn = 'p';
+    for (auto &pawn : whitePawns) pawn = 'P';
 
     board.at(0).at(0) = 'r';
     board.at(0).at(7) = 'r';
