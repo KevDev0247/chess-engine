@@ -15,8 +15,10 @@ void humanMove(string origin, string dest, Board* board) {
 
     int originX = origin[0] - 'a';
     int originY = origin[1] - '1';
+    originY = 7 - originY;
     int destX = dest[0] - 'a';
     int destY = dest[1] - '1';
+    destY = 7 - destY;
 
     cout << originY << " " << originX << endl;
 
