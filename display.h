@@ -10,7 +10,7 @@ protected:
 public:
     Display(Board *board);
     virtual void notify();
-    virtual ~Display();
+    virtual ~Display() {};
 };
 
 #endif
