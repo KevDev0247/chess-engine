@@ -1,15 +1,44 @@
 #include "board.h"
 #include "pieceMoveGen.h"
+#include <vector>
+using namespace std;
 
-Board::Board() {}
+Board::Board() {
+    for (int i = 0; i < 7; i++) {
+        vector<char> row;
+        for (int i = 0; i < 7; i++) {
+            row.push_back('-');
+        }
+        board.push_back(row);
+    }
+    whitePlaying = true;
+}
 
 void Board::setPieceMoveGen(PieceMoveGen *moveGen) {
     this->moveGen = moveGen;
 }
 
+// first assume valid input, add checks later
+bool Board::setPieceOnBoard(int row, int col, char piece) {
+    board.at(row).at(col) = piece;
+}
+
+// first assume valid input, add checks later
+void Board::removePiece(int row, int col) {
+    board.at(row).at(col) = '-';
+}
+
+void Board::setWhitePlaying(bool isWhitePlaying) {
+    whitePlaying = isWhitePlaying;
+}
+
 bool Board::executeMove(Move move) {
-    board.at(move.dstSquareY).at(move.dstSquareX) = move.piece;
-    board.at(move.originSquareY).at(move.originSquareX) = '-';
+    if (baseCheckValidity(move)) {
+        board.at(move.dstSquareY).at(move.dstSquareX) = move.piece;
+        board.at(move.originSquareY).at(move.originSquareX) = '-';
+        return true;
+    }
+    return false;
 }
 
 std::vector<Move> Board::getMoves() {

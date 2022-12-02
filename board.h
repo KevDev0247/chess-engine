@@ -22,6 +22,9 @@ class Board {
         void detachDisplay(Display* display);
 
         void setPieceMoveGen(PieceMoveGen *moveGen);
+        void setWhitePlaying(bool whitePlaying);
+        bool setPieceOnBoard(int row, int col, char piece);
+        void removePiece(int row, int col);
         bool executeMove(Move move);
 
         std::vector<std::vector<char>> getBoard();
