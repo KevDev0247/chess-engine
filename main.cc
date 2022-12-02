@@ -7,6 +7,7 @@
 #include "levelOne.h"
 #include "levelTwo.h"
 #include "levelThree.h"
+#include "textDisplay.h"
 using namespace std;
 
 void humanMove(string origin, string dest, Board* board) {
@@ -46,10 +47,12 @@ int main() {
     // Can encapsulate all of this information in the Game class for better style
     string whiteType;
     string blackType;
-    Board *board = new Board();
     string turn = "White";
     int whiteScore = 0, blackscore = 0;
     bool humanVsComputer = false;
+
+    Board *board = new Board();
+    TextDisplay *textDisplay = new TextDisplay(board);
     Computer *computer;
     int level;
     
@@ -124,6 +127,7 @@ int main() {
                     }
                     turn = "White";
                 }
+                textDisplay->notify();
             }
             if (command == "setup") {
                 while (!cin.eof()) {
