@@ -4,9 +4,9 @@
 using namespace std;
 
 Board::Board() {
-    for (int i = 0; i < 7; i++) {
+    for (int i = 0; i < 8; i++) {
         vector<char> row;
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 8; i++) {
             row.push_back('-');
         }
         board.push_back(row);
