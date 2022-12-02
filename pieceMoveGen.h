@@ -30,4 +30,10 @@ class PawnMoveGen : public PieceMoveGen {
     std::vector<Move> getMoves() override;
 };
 
+
+class RookMoveGen : public PieceMoveGen {
+    using PieceMoveGen::PieceMoveGen;
+    std::vector<Move> getMoves() override;
+};
+
 #endif

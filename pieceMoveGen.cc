@@ -99,6 +99,44 @@ vector<Move> KnightMoveGen::getMoves() {
   return result;
 }
 
+vector<Move> genRookMoves(
+  vector<vector<char>> &boardArray,
+  int y,
+  int x
+) {
+  vector<Move> result;
+
+  bool whitePiece = isupper(boardArray[y][x]);
+
+  // up
+  for (int i = y; i >= 0; i--) {
+    if (whitePiece && isupper(boardArray[i][x])) {
+      break;
+    }
+  }
+
+  return result;
+}
+
+
+vector<Move> RookMoveGen::getMoves() {
+  vector<Move> result = next->getMoves();
+  auto boardArray = board->getBoard();
+  bool white = board->getWhitePlaying();
+  vector<Move> newMoves;
+  for (int i = 0; i < 8; i++) {
+    for (int j = 0; j < 8; j++) {
+
+    }
+  }
+
+  for (auto &i : newMoves) {
+    if (board->baseCheckValidity(i)) {
+      result.push_back(i);
+    }
+  }
+  return result;
+}
 
 vector<Move> PawnMoveGen::getMoves() {
   vector<Move> result = next->getMoves();
@@ -322,8 +360,7 @@ vector<Move> KingMoveGen::getMoves() {
         // if (8 - i > j) secondQuadrant = 8 - i;
         // else secondQuadrant = j;
 
-        int m = j, k = i;
-
+        m = j, k = i;
         while (k > 0 && m < 8) {
           if (k != j) 
             newMoves.push_back({
@@ -411,7 +448,7 @@ vector<Move> KingMoveGen::getMoves() {
         }
 
         // diagonal moves
-        int m = j, k = i;
+        m = j, k = i;
         while (k > 0 && m < 8) {
           if (k != j) 
             newMoves.push_back({
