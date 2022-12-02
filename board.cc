@@ -108,7 +108,7 @@ bool Board::baseCheckValidity(Move move) {
     if (!whitePlaying && islower(dstPiece)) return false;
     if (!whitePlaying && isupper(originPiece)) return false;
 
-    if ((originPiece == 'P' || 'p') && !((horizontal == 1 && vertical == 0) || (horizontal == 0 && vertical == 1))) return false;
+    if ((originPiece == 'P' || 'p') && !((horizontal == 0 && vertical == 2) || (horizontal == 0 && vertical == 1))) return false;
     if ((originPiece == 'K' || 'k') && !(horizontal == 1 || vertical == 1)) return false;
     if ((originPiece == 'Q' || 'q') && !(horizontal == vertical || horizontal == 0 || vertical == 0)) return false;
     if ((originPiece == 'R' || 'r') && !(horizontal == 0 || vertical == 0)) return false;
