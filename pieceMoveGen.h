@@ -25,4 +25,9 @@ class KingMoveGen : public PieceMoveGen {
     std::vector<Move> getMoves() override;
 };
 
+class PawnMoveGen : public PieceMoveGen {
+    using PieceMoveGen::PieceMoveGen;
+    std::vector<Move> getMoves() override;
+};
+
 #endif
