@@ -169,6 +169,8 @@ int main() {
             }
         }
     }
-
+    delete textDisplay;
+    delete board;
+    
     return 0;
 }
