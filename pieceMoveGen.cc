@@ -176,12 +176,12 @@ vector<Move> PawnMoveGen::getMoves() {
   for (int i = 0; i < 8; i++) {
     for (int j = 0; j < 8; j++) {
       if (boardArray[i][j] == 'p') {
-        if (i == 6) {
+        if (i == 1 && boardArray[2][j] == ' ' && boardArray[3][j] == ' ') {
           newMoves.push_back({
             j,
             i,
             j,
-            i - 2,
+            3,
             ' ',
             boardArray[i][j],
             MoveType::Normal
@@ -222,17 +222,18 @@ vector<Move> PawnMoveGen::getMoves() {
           });
         }
       } else if (boardArray[i][j] == 'P') {
-        if (i == 1) {
+        if (i == 6 && boardArray[5][j] == ' ' && boardArray[4][j] == ' ') {
           newMoves.push_back({
             j,
             i,
             j,
-            i + 2,
+            4,
             ' ',
             boardArray[i][j],
             MoveType::Normal
           });
         }
+        
         if (i == 0) continue;
         if (boardArray[i - 1][j] == ' ') {
           newMoves.push_back({
