@@ -4,13 +4,13 @@
 
 class Board;
 
-class Display {
+class BoardDisplay {
 protected:
     Board *board;
 public:
-    Display(Board *board);
+    BoardDisplay(Board *board) : board{board} {};
     virtual void notify() {};
-    virtual ~Display() {};
+    virtual ~BoardDisplay() {};
 };
 
 #endif

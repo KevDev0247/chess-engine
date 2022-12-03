@@ -3,7 +3,7 @@
 
 using namespace std;
 
-TextDisplay::TextDisplay(Board *board) : Display{board} {}
+TextDisplay::TextDisplay(Board *board) : BoardDisplay{board} {}
 
 void TextDisplay::notify() {
   std::vector<std::vector<char>> pieces = board->getBoard();

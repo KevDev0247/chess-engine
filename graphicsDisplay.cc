@@ -1,11 +1,11 @@
 #include "graphicsDisplay.h"
 #include <string>
 
-GraphicsDisplay::GraphicsDisplay(Board *board) : Display{board} {
+GraphicsDisplay::GraphicsDisplay(Board *board) : BoardDisplay{board} {
   xw = nullptr;
 }
 
-GraphicsDisplay::notify() {
+void GraphicsDisplay::notify() {
   if (!xw) {
     xw = new Xwindow(400, 400);
   }
@@ -19,11 +19,11 @@ GraphicsDisplay::notify() {
         color = Xwindow::Brown;
       }
       xw->fillRectangle(j * 50, i * 50, 50, 50, color);
-      xw->drawString(j * 50, i * 50, string(1, board->getBoard[j][i]));
+      xw->drawString(j * 50, i * 50, std::string(1, board->getBoard()[j][i]));
     }
   }
 }
 
-~GraphicsDisplay() {
+GraphicsDisplay::~GraphicsDisplay() {
   delete xw;
 }

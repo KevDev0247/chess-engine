@@ -1,6 +1,6 @@
-#include "display.h"
+#include "boarddisplay.h"
 
-class TextDisplay : public Display {
+class TextDisplay : public BoardDisplay {
   public:
     TextDisplay(Board *board);
     void notify() override;
