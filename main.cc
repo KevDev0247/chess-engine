@@ -176,6 +176,10 @@ int main() {
                     }
                     turn = "White";
                 }
+
+                // debugging
+                if (board->inChecks()) cout << "in check" << endl;
+                if (board->inCheckmate()) cout << "in checkmate" << endl;
             }
             if (command == "setup") {
                 setup = true;
@@ -221,6 +225,7 @@ int main() {
             }
         }
     }
+
     delete textDisplay;
     delete graphicsDisplay;
     delete board;

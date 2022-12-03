@@ -18,9 +18,9 @@ bool Computer::baseCheckLevelThree(Move move) {
     int dstY = move.dstSquareY;
 
     // not making a copy
-    Board* mockBoard = board;
-    mockBoard->executeMove(move);
-    vector<Move> generatedMoves = mockBoard->getMoves();
+    Board* simulation{board};
+    simulation->executeMove(move);
+    vector<Move> generatedMoves = simulation->getMoves();
 
     for (auto generatedMove : generatedMoves) 
         if (generatedMove.dstSquareX == dstX && generatedMove.dstSquareY == dstY)

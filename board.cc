@@ -25,6 +25,17 @@ Board::Board() {
     this->whitePlaying = true;   
 }
 
+Board::Board(const Board &other) : whitePlaying{other.whitePlaying}, canCastleWhite{other.canCastleWhite} {
+    Board *newBoard = new Board();
+    for (auto row : other.board) {
+        vector<char> newRow;
+        for (auto col : row) {
+            newRow.push_back(col);
+        }
+        newBoard->getBoard().push_back(newRow);
+    }
+}
+
 bool Board::setPieceOnBoard(int row, int col, char piece) {
     board.at(row).at(col) = piece;
 }
@@ -51,6 +62,10 @@ void Board::removePiece(int row, int col) {
 
 void Board::setWhitePlaying(bool isWhitePlaying) {
     whitePlaying = isWhitePlaying;
+}
+
+void Board::setCanCastleWhite(bool isAbleToCastleWhite) {
+    canCastleWhite = isAbleToCastleWhite;
 }
 
 void Board::executeMove(Move move) {
@@ -100,15 +115,26 @@ bool Board::getWhitePlaying() {
     return whitePlaying;
 }
 
+bool Board::getCanCastleWhite() {
+    return canCastleWhite;
+}
+
 bool Board::inChecks() {
     vector<Move> generatedMoves = getMoves();
     for (auto move : generatedMoves)
         if (board.at(move.dstSquareY).at(move.dstSquareX) == 'K' || 'k')
             return true;
+    return false;
 }
 
 bool Board::inCheckmate() {
-    
+    if (inChecks()) {
+        Board *simulation{this};
+        simulation->switchSide();
+        vector<Move> generatedMoves = simulation->getMoves();
+        if (generatedMoves.size() == 0) return true;
+    }
+    return false;
 }
 
 bool Board::baseCheckValidity(Move move) {

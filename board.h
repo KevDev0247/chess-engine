@@ -19,6 +19,7 @@ class Board {
 
     public:
         Board();
+        Board(const Board &other);
         ~Board() {};
 
         void displayBoard();
@@ -27,6 +28,7 @@ class Board {
         void notifyDisplays();
 
         void setWhitePlaying(bool whitePlaying);
+        void setCanCastleWhite(bool canCastleWhite);
         bool setPieceOnBoard(int row, int col, char piece);
         void removePiece(int row, int col);
         void executeMove(Move move);
@@ -43,6 +45,7 @@ class Board {
         bool causeCheck();
         std::string getFEN();
         bool getWhitePlaying();
+        bool getCanCastleWhite();
 
         bool baseCheckValidity(Move move);
 };
