@@ -3,16 +3,16 @@
 #include <iostream>
 #include <vector>
 #include "player.h"
-#include "display.h"
+#include "boarddisplay.h"
 #include "moveGen.h"
 
 class MoveGen;
 class PieceMoveGen;
-class Display;
+class BoardDisplay;
 
 class Board {
     PieceMoveGen *moveGen;
-    std::vector<Display*> displays;
+    std::vector<BoardDisplay*> displays;
     std::vector<std::vector<char>> board;
     bool canCastleWhite;
     bool whitePlaying;
@@ -22,8 +22,8 @@ class Board {
         ~Board() {};
 
         void displayBoard();
-        void attachDisplay(Display* display);
-        void detachDisplay(Display* display);
+        void attachDisplay(BoardDisplay* display);
+        void detachDisplay(BoardDisplay* display);
         void notifyDisplays();
 
         void setWhitePlaying(bool whitePlaying);

@@ -29,7 +29,7 @@ bool Board::setPieceOnBoard(int row, int col, char piece) {
     board.at(row).at(col) = piece;
 }
 
-void Board::attachDisplay(Display* display) {
+void Board::attachDisplay(BoardDisplay* display) {
     displays.push_back(display);
 }
 
