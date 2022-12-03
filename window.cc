@@ -9,11 +9,12 @@
 using namespace std;
 
 Xwindow::Xwindow(int width, int height) {
-
+  disabled = false;
   d = XOpenDisplay(NULL);
   if (d == NULL) {
     cerr << "Cannot open display" << endl;
-    exit(1);
+    disabled = true;
+    return;
   }
   s = DefaultScreen(d);
   w = XCreateSimpleWindow(d, RootWindow(d, s), 10, 10, width, height, 1,
@@ -62,17 +63,20 @@ Xwindow::Xwindow(int width, int height) {
 }
 
 Xwindow::~Xwindow() {
+  if (disabled) return;
   XFreeGC(d, gc);
   XCloseDisplay(d);
 }
 
 void Xwindow::fillRectangle(int x, int y, int width, int height, int colour) {
+  if (disabled) return;
   XSetForeground(d, gc, colours[colour]);
   XFillRectangle(d, w, gc, x, y, width, height);
   XSetForeground(d, gc, colours[Black]);
 }
 
 void Xwindow::drawString(int x, int y, string msg) {
+  if (disabled) return;
   XDrawString(d, w, DefaultGC(d, s), x, y, msg.c_str(), msg.length());
 }
 

@@ -10,6 +10,7 @@ class Xwindow {
   int s;
   GC gc;
   unsigned long colours[10];
+  bool disabled;
 
  public:
   Xwindow(int width=500, int height=500);  // Constructor; displays the window.
