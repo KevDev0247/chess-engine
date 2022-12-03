@@ -119,12 +119,14 @@ int main() {
     string whiteType;
     string blackType;
     string turn = "White";
-    int whiteScore = 0, blackscore = 0;
 
     Board *board = new Board();
     TextDisplay *textDisplay = new TextDisplay(board);
     Computer *computer;
+
+    int whiteScore = 0, blackscore = 0;
     int level;
+    bool setup = false;
 
     board->attachDisplay(textDisplay);
     
@@ -138,7 +140,7 @@ int main() {
             string command;
             ss >> command;
             if (command == "game") {
-                initializeBoard(board);
+                if (!setup) initializeBoard(board);
 
                 ss >> whiteType >> blackType;
                 
@@ -194,6 +196,7 @@ int main() {
                 }
             }
             if (command == "setup") {
+                setup = true;
                 while (!cin.eof()) {
                     string setupInput, action;
                     getline(cin, setupInput);
