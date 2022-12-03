@@ -5,6 +5,8 @@
 #include "move.h"
 #include "board.h"
 
+class Board;
+
 class MoveGen {
 protected:
     Board *board;

@@ -3,6 +3,7 @@
 #include <iostream>
 #include "move.h"
 #include "boarddisplay.h"
+#include "board.h"
 
 class Board;
 
