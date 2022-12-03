@@ -52,7 +52,6 @@ void Board::executeMove(Move move) {
 }
 
 std::vector<Move> Board::getMoves() {
-    if (moveGen == nullptr) cout << "null movegen" << endl;
     return moveGen->getMoves();
 }
 
