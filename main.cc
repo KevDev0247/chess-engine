@@ -37,7 +37,11 @@ void humanMove(string origin, string dest, Board* board, Human* human) {
 
     // if human move successful, switch side on board
     // else debugging for now
-    if (success) {
+    if ((newMove.piece == 'k' || newMove.piece == 'K') && (abs(originX - destX) >= 2)) {
+        board->executeCastle(newMove);
+        board->switchSide();
+        board->notifyDisplays();
+    } else if (success) {
         board->executeMove(newMove);
         board->switchSide();
         board->notifyDisplays();
