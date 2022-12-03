@@ -176,17 +176,29 @@ vector<Move> PawnMoveGen::getMoves() {
   for (int i = 0; i < 8; i++) {
     for (int j = 0; j < 8; j++) {
       if (boardArray[i][j] == 'p') {
+        if (i == 6) {
+          newMoves.push_back({
+            j,
+            i,
+            j,
+            i - 2,
+            ' ',
+            boardArray[i][j],
+            MoveType::Normal
+          });
+        }
         if (i == 7) continue;
-        if (i < 7 && boardArray[i + 1][j] == ' ');
-        newMoves.push_back({
-          j,
-          i,
-          j,
-          i + 1,
-          ' ',
-          boardArray[i][j],
-          MoveType::Normal
-        });
+        if (i < 7 && boardArray[i + 1][j] == ' ') {
+          newMoves.push_back({
+            j,
+            i,
+            j,
+            i + 1,
+            ' ',
+            boardArray[i][j],
+            MoveType::Normal
+          });
+        }
         if (j < 7 && isupper(boardArray[i + 1][j + 1])) {
           newMoves.push_back({
             j,
@@ -210,17 +222,29 @@ vector<Move> PawnMoveGen::getMoves() {
           });
         }
       } else if (boardArray[i][j] == 'P') {
+        if (i == 0) {
+          newMoves.push_back({
+            j,
+            i,
+            j,
+            i + 2,
+            ' ',
+            boardArray[i][j],
+            MoveType::Normal
+          });
+        }
         if (i == 0) continue;
-        if (boardArray[i - 1][j] == ' ');
-        newMoves.push_back({
-          j,
-          i,
-          j,
-          i - 1,
-          ' ',
-          boardArray[i][j],
-          MoveType::Normal
-        });
+        if (boardArray[i - 1][j] == ' ') {
+          newMoves.push_back({
+            j,
+            i,
+            j,
+            i - 1,
+            ' ',
+            boardArray[i][j],
+            MoveType::Normal
+          });
+        }
         if (j < 7 && islower(boardArray[i - 1][j + 1])) {
           newMoves.push_back({
             j,
