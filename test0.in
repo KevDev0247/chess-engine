@@ -1,13 +1,13 @@
 setup
 + R a8
-+ p e1
-+ P f5
++ p e7
++ P f3
 done
 game human human
 move a8 a2
-move e1 e3
+move e7 e5
 move a2 a8
-move e3 e4
+move e5 e4
 move a8 e8
-move e4 f5
+move e4 f3
 move e8 a8
