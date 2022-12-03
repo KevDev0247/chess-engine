@@ -76,13 +76,13 @@ bool Board::baseCheckValidity(Move move) {
     char dstPiece = board.at(dstY).at(dstX);
     int vertical = abs(originY - dstY);
     int horizontal = abs(originX - dstX);
-    cout << originPiece << ' ' << dstPiece << endl;
+    // cout << originPiece << ' ' << dstPiece << endl;
 
     if (whitePlaying && isupper(dstPiece)) return false;
     if (whitePlaying && islower(originPiece)) return false;
     if (!whitePlaying && islower(dstPiece)) return false;
     if (!whitePlaying && isupper(originPiece)) return false;
-    cout << vertical << ' ' << horizontal << endl;
+    // cout << vertical << ' ' << horizontal << endl;
 
     if ((originPiece == 'P' || originPiece == 'p') && !((horizontal == 0 && vertical == 2) || (horizontal == 0 && vertical == 1)
                                                         || (horizontal == 1 && vertical == 1))) return false;

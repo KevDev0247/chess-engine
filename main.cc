@@ -10,7 +10,7 @@
 #include "textDisplay.h"
 using namespace std;
 
-void humanMove(string origin, string dest, Board* board) {
+void humanMove(string origin, string dest, Board* board, Human* human) {
     // cout << origin[1] << " " << origin[0] << " " << dest[1] << " " << dest[0] << endl;
 
     int originX = origin[0] - 'a';
@@ -109,8 +109,6 @@ void initializeBoard(Board *board) {
     board->setPieceOnBoard(0, 4, 'k');
     board->setPieceOnBoard(7, 3, 'Q');
     board->setPieceOnBoard(7, 4, 'K');
-
-    board->setWhitePlaying(true);
 }
 
 int main() {
@@ -122,6 +120,7 @@ int main() {
 
     Board *board = new Board();
     TextDisplay *textDisplay = new TextDisplay(board);
+    Human *human = new Human(board);
     Computer *computer;
 
     int whiteScore = 0, blackscore = 0;
@@ -141,6 +140,7 @@ int main() {
             ss >> command;
             if (command == "game") {
                 if (!setup) initializeBoard(board);
+                board->setWhitePlaying(true);
 
                 ss >> whiteType >> blackType;
                 
@@ -175,7 +175,7 @@ int main() {
                         string origin;
                         string dest;
                         ss >> origin >> dest;
-                        humanMove(origin, dest, board);
+                        humanMove(origin, dest, board, human);
                     } else {
                         // Computer generate a move and execute it
                         computerMove(computer, board);
@@ -187,7 +187,7 @@ int main() {
                         string origin;
                         string dest;
                         ss >> origin >> dest;
-                        humanMove(origin, dest, board);
+                        humanMove(origin, dest, board, human);
                     } else {
                         // Computer generate a move and execute it
                         computerMove(computer, board);
