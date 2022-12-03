@@ -14,7 +14,8 @@ bool Human::checkValidity(Move move) {
         if (curr.dstSquareX == move.dstSquareX &&
             curr.dstSquareY == move.dstSquareY &&
             curr.moveType == move.moveType &&
-            curr.originSquareX == move.originSquareY &&
+            curr.originSquareX == move.originSquareX &&
+            curr.originSquareY == move.originSquareY &&
             curr.piece == move.piece &&
             curr.promotionPiece == move.promotionPiece) 
             return true;
