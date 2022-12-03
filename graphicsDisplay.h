@@ -1,6 +1,10 @@
 #include "display.h"
+#include "window.h"
 
 class GraphicsDisplay : public Display {
-  GraphicsDisplay(Board *board) : Display{board} {};
+  XWindow *xw;
+public:
+  GraphicsDisplay(Board *board);
   void notify() override;
+  ~GraphicsDisplay();
 };

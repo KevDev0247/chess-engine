@@ -8,6 +8,7 @@
 #include "levelTwo.h"
 #include "levelThree.h"
 #include "textDisplay.h"
+#include "graphicsDisplay.h"
 using namespace std;
 
 /* read input and facilitate human move */
@@ -99,6 +100,8 @@ int main() {
 
     Board *board = new Board();
     TextDisplay *textDisplay = new TextDisplay(board);
+    GraphicsDisplay *graphicsDisplay = new GraphicsDisplay(board);
+
     Human *human = new Human(board);
     Computer *computer;
 
@@ -107,6 +110,7 @@ int main() {
     bool setup = false;
 
     board->attachDisplay(textDisplay);
+    board->attachDisplay(graphicsDisplay);
     
     while (!cin.eof()) {
         getline(cin, input);
@@ -218,6 +222,7 @@ int main() {
         }
     }
     delete textDisplay;
+    delete graphicsDisplay;
     delete board;
     
     return 0;
