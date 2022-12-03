@@ -14,7 +14,6 @@ Board::Board() {
         board.push_back(row);
     }
 
-    // compilation error is next line
     KingMoveGen *kingMoveGen = new KingMoveGen(new EmptyMoveGen(this), this);
     QueenMoveGen *queenMoveGen = new QueenMoveGen(kingMoveGen, this);
     KnightMoveGen *knightMoveGen = new KnightMoveGen(queenMoveGen, this);
@@ -89,7 +88,6 @@ void Board::executeCastle(Move move) {
 }
 
 std::vector<Move> Board::getMoves() {
-    // here we need specific move gen
     return moveGen->getMoves();
 }
 

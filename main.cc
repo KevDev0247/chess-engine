@@ -10,6 +10,7 @@
 #include "textDisplay.h"
 using namespace std;
 
+/* read input and facilitate human move */
 void humanMove(string origin, string dest, Board* board, Human* human) {
     // cout << origin[1] << " " << origin[0] << " " << dest[1] << " " << dest[0] << endl;
 
@@ -21,9 +22,10 @@ void humanMove(string origin, string dest, Board* board, Human* human) {
     destY = 7 - destY;
     char piece = board->getBoard().at(originY).at(originX);
 
-    cout << "origin " << originY << " " << originX << endl;
-    cout << "dest " << destX << " " << destY << endl;
+    // cout << "origin " << originY << " " << originX << endl;
+    // cout << "dest " << destX << " " << destY << endl;
 
+    // create a new move and check its validity
     Move newMove = {
         originX,
         originY,
@@ -52,6 +54,7 @@ void humanMove(string origin, string dest, Board* board, Human* human) {
     }
 }
 
+/* computer generate a move */
 void computerMove(Computer *computer, Board *board) {
     Move newMove = computer->getMove();
     board->executeMove(newMove);
@@ -59,6 +62,7 @@ void computerMove(Computer *computer, Board *board) {
     board->notifyDisplays();
 }
 
+/* initialize a default board */
 void initializeBoard(Board *board) {
     for (int i = 0; i < 8; i++) {
         board->setPieceOnBoard(1, i, 'p');
@@ -92,16 +96,6 @@ int main() {
     string whiteType;
     string blackType;
     string turn = "White";
-
-    // issue: we need to initialize movegen here, but it doesn't have initial board state
-    // so we can't initialize movegen at construction
-    // maybe need a level 0 movegen that doesn't take in a board
-    /**
-     * initial board state for base movegen
-     * 1. default board (no setup mode)
-     * 2. setup board (board after some setup)
-     * 
-     */
 
     Board *board = new Board();
     TextDisplay *textDisplay = new TextDisplay(board);
@@ -189,6 +183,7 @@ int main() {
                     istringstream ssSetup{ setupInput };
                     ssSetup >> action;
 
+                    // add a piece on board
                     if (action == "+") {
                         string piece, location;
                         ssSetup >> piece >> location;
@@ -198,6 +193,7 @@ int main() {
 
                         board->setPieceOnBoard(y, x, piece[0]);
                     }
+                    // remove a piece on board
                     if (action == "-") {
                         string location;
                         ssSetup >> location;
@@ -206,6 +202,7 @@ int main() {
                         int y = 7 - (location[1] - '1');
                         board->removePiece(y, x);
                     }
+                    // set the color to play next
                     if (action == "=") {
                         string colour;
                         ssSetup >> colour;
