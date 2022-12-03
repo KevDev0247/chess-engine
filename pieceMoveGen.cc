@@ -222,7 +222,7 @@ vector<Move> PawnMoveGen::getMoves() {
           });
         }
       } else if (boardArray[i][j] == 'P') {
-        if (i == 0) {
+        if (i == 1) {
           newMoves.push_back({
             j,
             i,
