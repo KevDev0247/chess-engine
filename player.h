@@ -2,7 +2,7 @@
 #define PLAYER_H
 #include <iostream>
 #include "move.h"
-#include "board.h"
+#include "boarddisplay.h"
 
 class Board;
 
