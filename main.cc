@@ -33,7 +33,7 @@ void humanMove(string origin, string dest, Board* board, Human* human) {
         piece,
         MoveType::Normal
     };
-    bool success = board->baseCheckValidity(newMove);
+    bool success = human->checkValidity(newMove);
 
     // if human move successful, switch side on board
     // else debugging for now
@@ -41,6 +41,8 @@ void humanMove(string origin, string dest, Board* board, Human* human) {
         board->executeMove(newMove);
         board->switchSide();
         board->notifyDisplays();
+
+        board->setPieceMoveGen(new PieceMoveGen(board->getMoveGen(), board));
     } else {
         cout << "bad move" << endl;
         // debugging
@@ -53,6 +55,8 @@ void computerMove(Computer *computer, Board *board) {
     board->executeMove(newMove);
     board->switchSide();
     board->notifyDisplays();
+
+    board->setPieceMoveGen(new PieceMoveGen(board->getMoveGen(), board));
 }
 
 void initializeBoard(Board *board) {

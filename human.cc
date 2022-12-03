@@ -6,6 +6,7 @@ using namespace std;
 
 bool Human::checkValidity(Move move) {
     vector<Move> validMoves = board->getMoves();
+    
     for (int i = 0; i < validMoves.size(); i++) {
         Move curr = validMoves.at(i);
         if (curr.dstSquareX == move.dstSquareX &&

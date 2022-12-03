@@ -52,11 +52,16 @@ void Board::executeMove(Move move) {
 }
 
 std::vector<Move> Board::getMoves() {
+    if (moveGen == nullptr) cout << "null movegen" << endl;
     return moveGen->getMoves();
 }
 
 std::vector<std::vector<char>> Board::getBoard() {
     return board;
+}
+
+MoveGen* Board::getMoveGen() {
+    return moveGen;
 }
 
 bool Board::getWhitePlaying() {

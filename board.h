@@ -34,6 +34,7 @@ class Board {
         std::vector<std::vector<char>> getBoard();
         std::vector<Move> getMoves();
         std::vector<Move> legalMoves();
+        MoveGen* getMoveGen();
         Move attacks();
         bool inChecks();
         bool causeCheck();
