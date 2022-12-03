@@ -30,6 +30,7 @@ class Board {
         bool setPieceOnBoard(int row, int col, char piece);
         void removePiece(int row, int col);
         void executeMove(Move move);
+        void executeCastle(Move move);
         void switchSide();
 
         std::vector<std::vector<char>> getBoard();
