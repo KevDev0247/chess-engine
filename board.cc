@@ -21,7 +21,8 @@ Board::Board() {
     BishopMoveGen *bishopMoveGen = new BishopMoveGen(rookMoveGen, this);
     PawnMoveGen *pawnMoveGen = new PawnMoveGen(bishopMoveGen, this);
 
-    this->moveGen = pawnMoveGen;    
+    this->moveGen = pawnMoveGen; 
+    this->whitePlaying = true;   
 }
 
 void Board::setPieceMoveGen() {

@@ -120,7 +120,6 @@ int main() {
             if (command == "game") {
                 // initial board setup (with or without setup)
                 if (!setup) initializeBoard(board);
-                board->setWhitePlaying(true);
 
                 // parse level input and reset type to "computer"
                 ss >> whiteType >> blackType;
