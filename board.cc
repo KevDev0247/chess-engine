@@ -51,6 +51,32 @@ void Board::executeMove(Move move) {
     board.at(move.originSquareY).at(move.originSquareX) = ' ';
 }
 
+void Board::executeCastle(Move move) {
+    if ((move.piece == 'k') && (move.dstSquareX == 6)) {
+        board.at(0).at(6) = 'k';
+        board.at(0).at(5) = 'r';
+        board.at(0).at(4) = ' ';
+        board.at(0).at(7) = ' ';
+    } else if (move.piece == 'k') {
+        board.at(0).at(2) = 'k';
+        board.at(0).at(3) = 'r';
+        board.at(0).at(0) = ' ';
+        board.at(0).at(1) = ' ';
+        board.at(0).at(4) = ' ';
+    } else if ((move.piece == 'K') && (move.dstSquareX == 6)) {
+        board.at(7).at(6) = 'K';
+        board.at(7).at(5) = 'R';
+        board.at(7).at(4) = ' ';
+        board.at(7).at(7) = ' ';
+    } else if (move.piece == 'K') {
+        board.at(7).at(2) = 'K';
+        board.at(7).at(3) = 'R';
+        board.at(7).at(0) = ' ';
+        board.at(7).at(1) = ' ';
+        board.at(7).at(4) = ' ';
+    }
+}
+
 std::vector<Move> Board::getMoves() {
     return moveGen->getMoves();
 }
