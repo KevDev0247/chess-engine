@@ -9,9 +9,9 @@ class MoveGen {
 protected:
     Board *board;
 public:
-    MoveGen(Board *board) : board{board} {};
+    MoveGen(Board *board);
 
-    std::vector<Move> virtual getMoves() {return std::vector<Move>();};
+    std::vector<Move> virtual getMoves();
 };
 
 #endif

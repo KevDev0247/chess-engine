@@ -1,5 +1,6 @@
 #include "board.h"
 #include "pieceMoveGen.h"
+#include "emptyMoveGen.h"
 #include <vector>
 #include <iostream>
 using namespace std;
@@ -12,10 +13,20 @@ Board::Board() {
         }
         board.push_back(row);
     }
+
+    // compilation error is next line
+    KingMoveGen *kingMoveGen = new KingMoveGen(new EmptyMoveGen(this), this);
+    QueenMoveGen *queenMoveGen = new QueenMoveGen(kingMoveGen, this);
+    KnightMoveGen *knightMoveGen = new KnightMoveGen(queenMoveGen, this);
+    RookMoveGen *rookMoveGen = new RookMoveGen(knightMoveGen, this);
+    BishopMoveGen *bishopMoveGen = new BishopMoveGen(rookMoveGen, this);
+    PawnMoveGen *pawnMoveGen = new PawnMoveGen(bishopMoveGen, this);
+
+    this->moveGen = pawnMoveGen;    
 }
 
-void Board::setPieceMoveGen(PieceMoveGen *moveGen) {
-    this->moveGen = moveGen;
+void Board::setPieceMoveGen() {
+
 }
 
 bool Board::setPieceOnBoard(int row, int col, char piece) {
@@ -78,6 +89,7 @@ void Board::executeCastle(Move move) {
 }
 
 std::vector<Move> Board::getMoves() {
+    // here we need specific move gen
     return moveGen->getMoves();
 }
 

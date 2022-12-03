@@ -19,10 +19,9 @@ void humanMove(string origin, string dest, Board* board, Human* human) {
     int destX = dest[0] - 'a';
     int destY = dest[1] - '1';
     destY = 7 - destY;
+    char piece = board->getBoard().at(originY).at(originX);
 
     // cout << originY << " " << originX << endl;
-
-    char piece = board->getBoard().at(originY).at(originX);
 
     Move newMove = {
         originX,
@@ -45,8 +44,6 @@ void humanMove(string origin, string dest, Board* board, Human* human) {
         board->executeMove(newMove);
         board->switchSide();
         board->notifyDisplays();
-
-        board->setPieceMoveGen(new PieceMoveGen(board->getMoveGen(), board));
     } else {
         cout << "bad move" << endl;
         // debugging
@@ -59,40 +56,9 @@ void computerMove(Computer *computer, Board *board) {
     board->executeMove(newMove);
     board->switchSide();
     board->notifyDisplays();
-
-    board->setPieceMoveGen(new PieceMoveGen(board->getMoveGen(), board));
 }
 
 void initializeBoard(Board *board) {
-    // vector<vector<char>> boardArray = board->getBoard();
-
-    // vector<char> &blackPawns = boardArray.at(1);
-    // vector<char> &whitePawns = boardArray.at(6);
-    // for (auto &pawn : blackPawns) pawn = 'p';
-    // for (auto &pawn : whitePawns) pawn = 'P';
-
-    // boardArray.at(0).at(0) = 'r';
-    // boardArray.at(0).at(7) = 'r';
-    // boardArray.at(7).at(0) = 'R';
-    // boardArray.at(7).at(7) = 'R';
-    
-    // boardArray.at(0).at(1) = 'n';
-    // boardArray.at(0).at(6) = 'n';
-    // boardArray.at(7).at(1) = 'N';
-    // boardArray.at(7).at(6) = 'N';
-
-    // boardArray.at(0).at(2) = 'b';
-    // boardArray.at(0).at(5) = 'b';
-    // boardArray.at(7).at(2) = 'B';
-    // boardArray.at(7).at(5) = 'B';
-
-    // boardArray.at(0).at(3) = 'q';
-    // boardArray.at(0).at(4) = 'k';
-    // boardArray.at(7).at(3) = 'Q';
-    // boardArray.at(7).at(4) = 'K';
-
-    // board->setWhitePlaying(true);
-
     for (int i = 0; i < 8; i++) {
         board->setPieceOnBoard(1, i, 'p');
         board->setPieceOnBoard(6, i, 'P');
@@ -160,10 +126,6 @@ int main() {
                 // initial board setup (with or without setup)
                 if (!setup) initializeBoard(board);
                 board->setWhitePlaying(true);
-
-                // level 0 movegen shud be board at this time
-                PieceMoveGen* baseMoveGen = new PieceMoveGen(new MoveGen(board), board);
-                board->setPieceMoveGen(baseMoveGen);
 
                 // parse level input and reset type to "computer"
                 ss >> whiteType >> blackType;

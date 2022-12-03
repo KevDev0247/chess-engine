@@ -6,6 +6,7 @@
 #include "display.h"
 #include "moveGen.h"
 
+class MoveGen;
 class PieceMoveGen;
 class Display;
 
@@ -25,7 +26,7 @@ class Board {
         void detachDisplay(Display* display);
         void notifyDisplays();
 
-        void setPieceMoveGen(PieceMoveGen *moveGen);
+        void setPieceMoveGen();
         void setWhitePlaying(bool whitePlaying);
         bool setPieceOnBoard(int row, int col, char piece);
         void removePiece(int row, int col);
