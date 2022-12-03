@@ -25,10 +25,6 @@ Board::Board() {
     this->whitePlaying = true;   
 }
 
-void Board::setPieceMoveGen() {
-
-}
-
 bool Board::setPieceOnBoard(int row, int col, char piece) {
     board.at(row).at(col) = piece;
 }
@@ -102,6 +98,17 @@ MoveGen* Board::getMoveGen() {
 
 bool Board::getWhitePlaying() {
     return whitePlaying;
+}
+
+bool Board::inChecks() {
+    vector<Move> generatedMoves = getMoves();
+    for (auto move : generatedMoves)
+        if (board.at(move.dstSquareY).at(move.dstSquareX) == 'K' || 'k')
+            return true;
+}
+
+bool Board::inCheckmate() {
+    
 }
 
 bool Board::baseCheckValidity(Move move) {

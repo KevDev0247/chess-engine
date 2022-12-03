@@ -26,7 +26,6 @@ class Board {
         void detachDisplay(Display* display);
         void notifyDisplays();
 
-        void setPieceMoveGen();
         void setWhitePlaying(bool whitePlaying);
         bool setPieceOnBoard(int row, int col, char piece);
         void removePiece(int row, int col);
@@ -40,6 +39,7 @@ class Board {
         MoveGen* getMoveGen();
         Move attacks();
         bool inChecks();
+        bool inCheckmate();
         bool causeCheck();
         std::string getFEN();
         bool getWhitePlaying();
