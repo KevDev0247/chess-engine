@@ -397,10 +397,10 @@ bool addLinearMove(
   }
 
   result.push_back({
-    y,
     x,
-    i,
+    y,
     j,
+    i,
     ' ',
     boardArray[y][x],
     MoveType::Normal
