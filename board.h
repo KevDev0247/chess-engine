@@ -4,6 +4,7 @@
 #include <vector>
 #include "player.h"
 #include "display.h"
+#include "moveGen.h"
 
 class PieceMoveGen;
 class Display;
