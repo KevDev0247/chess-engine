@@ -1,0 +1,18 @@
+setup
++ N d4
++ r b5
+done
+game human human
+move d4 f5
+move b5 b4
+move f5 d4
+move b4 b5
+move d4 e6
+move b5 b4
+move e6 d4
+move b4 b5
+move d4 c6
+move b5 b4
+move c6 d4
+move b4 b5
+move d4 b5

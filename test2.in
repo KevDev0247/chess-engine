@@ -1,0 +1,12 @@
+setup
++ B d4
++ r a7
+done
+game human human
+move d4 a1
+move a7 a6
+move a1 d4
+move a6 a5
+move d4 g1
+move a5 a7
+move g1 a7

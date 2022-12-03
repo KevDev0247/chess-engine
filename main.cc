@@ -21,7 +21,8 @@ void humanMove(string origin, string dest, Board* board, Human* human) {
     destY = 7 - destY;
     char piece = board->getBoard().at(originY).at(originX);
 
-    // cout << originY << " " << originX << endl;
+    cout << "origin " << originY << " " << originX << endl;
+    cout << "dest " << destX << " " << destY << endl;
 
     Move newMove = {
         originX,
