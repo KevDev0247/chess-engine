@@ -122,6 +122,16 @@ int main() {
     string blackType;
     string turn = "White";
 
+    // issue: we need to initialize movegen here, but it doesn't have initial board state
+    // so we can't initialize movegen at construction
+    // maybe need a level 0 movegen that doesn't take in a board
+    /**
+     * initial board state for base movegen
+     * 1. default board (no setup mode)
+     * 2. setup board (board after some setup)
+     * 
+     */
+
     Board *board = new Board();
     TextDisplay *textDisplay = new TextDisplay(board);
     Human *human = new Human(board);
@@ -143,12 +153,16 @@ int main() {
             string command;
             ss >> command;
             if (command == "game") {
+                // initial board setup (with or without setup)
                 if (!setup) initializeBoard(board);
                 board->setWhitePlaying(true);
 
+                // level 0 movegen shud be board at this time
+                PieceMoveGen* baseMoveGen = new PieceMoveGen(new MoveGen(board), board);
+                board->setPieceMoveGen(baseMoveGen);
+
+                // parse level input and reset type to "computer"
                 ss >> whiteType >> blackType;
-                
-                // parse level and reset type to "computer"
                 if (whiteType != "human") {
                     level = whiteType[9] - '0';
                     whiteType = "computer";
