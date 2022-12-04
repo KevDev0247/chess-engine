@@ -1,88 +1,9 @@
-game computer[1] computer[1]
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
-move
+setup
++ k e8
++ b d8
++ b f8
++ R d5
+done
+game human human
+move d5 e5
+move d8 d7

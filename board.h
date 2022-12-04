@@ -16,6 +16,8 @@ class Board {
     std::vector<std::vector<char>> board;
     bool canCastleWhite;
     bool whitePlaying;
+    bool whiteInCheck;
+    bool blackInCheck;
 
     public:
         Board();

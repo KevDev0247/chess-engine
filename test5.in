@@ -1,14 +1,10 @@
 setup
-+ K g7
-+ R a8
-+ r e5
-+ n g5
-+ q a2
-= B
++ k e8
++ b d8
++ b f8
++ B c6
++ B g6
++ R d5
 done
 game human human
-move e5 e7
-move g7 h8
-move e7 e8
-move a8 a7
-move a2 a1
+move d5 e5

@@ -5,7 +5,7 @@
 #include <iostream>
 using namespace std;
 
-Board::Board() {
+Board::Board() : whitePlaying{true}, canCastleWhite{false}, whiteInCheck{false}, blackInCheck{false} {
     // initialize an empty board
     for (int i = 0; i < 8; i++) {
         vector<char> row;
@@ -24,10 +24,12 @@ Board::Board() {
     PawnMoveGen *pawnMoveGen = new PawnMoveGen(bishopMoveGen, this);
 
     this->moveGen = pawnMoveGen; 
-    this->whitePlaying = true;   
+    // this->whitePlaying = true;   
 }
 
-Board::Board(const Board &other) : whitePlaying{other.whitePlaying}, canCastleWhite{other.canCastleWhite} {
+Board::Board(const Board &other) : 
+    whitePlaying{other.whitePlaying}, canCastleWhite{other.canCastleWhite}, 
+    whiteInCheck{other.whiteInCheck}, blackInCheck{other.blackInCheck} {
     // Perform deep copy of the board
     for (auto row : other.board) {
         vector<char> newRow;
@@ -140,8 +142,14 @@ bool Board::inChecks() {
     vector<Move> generatedMoves = simulation->getMoves();
     for (auto move : generatedMoves) {
         char piece = board.at(move.dstSquareY).at(move.dstSquareX);
-        if (piece == 'K' || piece == 'k') 
+        if (piece == 'K') {
+            whiteInCheck = true;
             return true;
+        }
+        if (piece == 'k') {
+            blackInCheck = true;
+            return true;
+        }
     }
     return false;
 }
@@ -206,41 +214,18 @@ bool Board::baseCheckValidity(Move move) {
 }
 
 bool Board::checkValidity(Move move) {
-    int dstX = move.dstSquareX;
-    int dstY = move.dstSquareY;
-    int originX = move.originSquareX;
-    int originY = move.originSquareY;
-
-    if (!(dstX >= 0 && dstX < 8 && dstY >= 0 && dstY < 8)) 
-        return false;
-
-    char originPiece = board.at(originY).at(originX);
-    char dstPiece = board.at(dstY).at(dstX);
-    int vertical = abs(originY - dstY);
-    int horizontal = abs(originX - dstX);
-
-    // check if moves for the wrong side or capturing piece from the same side
-    if (whitePlaying && isupper(dstPiece)) return false;
-    if (whitePlaying && islower(originPiece)) return false;
-    if (!whitePlaying && islower(dstPiece)) return false;
-    if (!whitePlaying && isupper(originPiece)) return false;
-
-    // check if pieces are moving according to rules
-    if ((originPiece == 'P' || originPiece == 'p') && !((horizontal == 0 && vertical == 2) || (horizontal == 0 && vertical == 1)
-                                                        || (horizontal == 1 && vertical == 1))) return false;
-    if ((originPiece == 'K' || originPiece == 'k') && !(horizontal == 1 || vertical == 1 ||
-                                                        (horizontal == 2 && vertical == 0) || (horizontal == 3 && vertical == 0))) return false;
-    if ((originPiece == 'Q' || originPiece == 'q') && !(horizontal == vertical || horizontal == 0 || vertical == 0)) return false;
-    if ((originPiece == 'R' || originPiece == 'r') && !(horizontal == 0 || vertical == 0)) return false;
-    if ((originPiece == 'B' || originPiece == 'b') && !(horizontal == vertical)) return false;
-    if ((originPiece == 'N' || originPiece == 'n') && !((horizontal == 2 && vertical == 1) || (horizontal == 1 && vertical == 2))) return false;
-
     // Check if a king move places the king under attack
+    char originPiece = board.at(move.originSquareY).at(move.originSquareX);
     if (originPiece == 'K' || originPiece == 'k') {
         Board *simulation = new Board(*this);
         simulation->executeMove(move);
         if (simulation->inChecks()) return false;
     }
+
+    // cout << "origin " << originPiece << endl;
+    // this is detecting the wrong piece shud be next next round
+    if (whitePlaying && whiteInCheck && originPiece != 'K') return false;
+    if (!whitePlaying && blackInCheck && originPiece != 'k') return false;
 
     return true;
 }
