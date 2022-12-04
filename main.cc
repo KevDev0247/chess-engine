@@ -105,10 +105,11 @@ int main() {
     GraphicsDisplay *graphicsDisplay = new GraphicsDisplay(board);
 
     Human *human = new Human(board);
-    Computer *computer = nullptr;
+    Computer *whiteComputer = nullptr;
+    Computer *blackComputer = nullptr;
 
     int whiteScore = 0, blackscore = 0;
-    int level;
+    int level = 0;
     bool setup = false;
 
     board->attachDisplay(textDisplay);
@@ -128,20 +129,25 @@ int main() {
                 if (!setup) initializeBoard(board);
 
                 // parse level input and reset type to "computer"
-                level = 0;
                 ss >> whiteType >> blackType;
                 if (whiteType != "human") {
                     level = whiteType[9] - '0';
                     whiteType = "computer";
+
+                    // instantiate white computer based on the input level
+                    if (level == 1) whiteComputer = new LevelOne(board);
+                    if (level == 2) whiteComputer = new LevelTwo(board);
+                    if (level == 3) whiteComputer = new LevelThree(board);
                 }
                 if (blackType != "human") {
                     level = whiteType[9] - '0';
                     blackType = "computer";
+
+                    // instantiate black computer based on the input level
+                    if (level == 1) blackComputer = new LevelOne(board);
+                    if (level == 2) blackComputer = new LevelTwo(board);
+                    if (level == 3) blackComputer = new LevelThree(board);
                 }
-                // instantiate computer based on the input level
-                if (level == 1) computer = new LevelOne(board);
-                if (level == 2) computer = new LevelTwo(board);
-                if (level == 3) computer = new LevelThree(board);
             }
             if (command == "resign") {
                 if (turn == "White") {
@@ -163,7 +169,7 @@ int main() {
                         humanMove(origin, dest, board, human);
                     } else {
                         // Computer generate a move and execute it
-                        computerMove(computer, board);
+                        computerMove(whiteComputer, board);
                     }
                     turn = "Black";
                 } else {
@@ -175,7 +181,7 @@ int main() {
                         humanMove(origin, dest, board, human);
                     } else {
                         // Computer generate a move and execute it
-                        computerMove(computer, board);
+                        computerMove(blackComputer, board);
                     }
                     turn = "White";
                 }
@@ -244,7 +250,8 @@ int main() {
     delete textDisplay;
     delete graphicsDisplay;
     delete board;
-    if (computer) delete computer;
+    if (blackComputer) delete blackComputer;
+    if (whiteComputer) delete whiteComputer;
     delete human;
     
     return 0;
