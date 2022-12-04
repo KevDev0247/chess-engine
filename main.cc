@@ -63,7 +63,7 @@ void computerMove(Computer *computer, Board *board) {
         if (board->checkValidity(validMove)) 
             levelOneMoves.push_back(validMove);
     }
-    
+
     if (!levelOneMoves.empty()) {
         Move newMove = computer->getMove();
         cout << "this move is from " << newMove.originSquareY << " " << newMove.originSquareX << "to " 
@@ -71,7 +71,8 @@ void computerMove(Computer *computer, Board *board) {
         board->executeMove(newMove);
         board->notifyDisplays();
         board->switchSide();        
-    } else {
+    }
+    if (levelOneMoves.empty() && !board->inCheckmate() && !board->inChecks()) {
         cout << "tie" << endl;
         board->notifyDisplays();
     }
