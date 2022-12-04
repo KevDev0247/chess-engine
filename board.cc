@@ -120,10 +120,12 @@ bool Board::getCanCastleWhite() {
 }
 
 bool Board::inChecks() {
-    vector<Move> generatedMoves = getMoves();
+    Board *simulation{this};
+    simulation->switchSide();
+    vector<Move> generatedMoves = simulation->getMoves();
+
     for (auto move : generatedMoves) {
         char piece = board.at(move.dstSquareY).at(move.dstSquareX);
-        // cout << piece << " is at " << move.dstSquareY << " " << move.dstSquareX << endl;
         if (piece == 'K' || piece == 'k') {
             cout << piece << " is at " << move.dstSquareY << " " << move.dstSquareX << endl;
             return true;            
