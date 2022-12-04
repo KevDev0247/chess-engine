@@ -21,7 +21,7 @@ void GraphicsDisplay::notify() {
         color = Xwindow::Brown;
       }
       xw->fillRectangle(j * 50, i * 50, 50, 50, color);
-      char piece = board->getBoard()[j][i];
+      char piece = board->getBoard()[i][j];
       if (piece == 'k' || piece == 'K') {
         if (piece == 'k') {
             xw->fillRectangle(j * 50, i * 50, 50, 50, Xwindow::Red);
