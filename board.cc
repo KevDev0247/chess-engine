@@ -121,9 +121,14 @@ bool Board::getCanCastleWhite() {
 
 bool Board::inChecks() {
     vector<Move> generatedMoves = getMoves();
-    for (auto move : generatedMoves)
-        if (board.at(move.dstSquareY).at(move.dstSquareX) == 'K' || 'k')
-            return true;
+    for (auto move : generatedMoves) {
+        char piece = board.at(move.dstSquareY).at(move.dstSquareX);
+        // cout << piece << " is at " << move.dstSquareY << " " << move.dstSquareX << endl;
+        if (piece == 'K' || piece == 'k') {
+            cout << piece << " is at " << move.dstSquareY << " " << move.dstSquareX << endl;
+            return true;            
+        }
+    }
     return false;
 }
 
