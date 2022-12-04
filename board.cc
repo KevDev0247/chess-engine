@@ -116,12 +116,12 @@ void Board::executeCastle(Move move) {
     }
 }
 
-void Board::executePromote(Move move, char piece) {
+void Board::executePromote(Move move, char promote) {
     if (move.piece == 'P') {
-        board.at(move.dstSquareY).at(move.dstSquareX) = (char) toupper(piece);
+        board.at(move.dstSquareY).at(move.dstSquareX) = (char) toupper(promote);
         board.at(move.originSquareY).at(move.originSquareX) = ' ';
     } else {
-        board.at(move.dstSquareY).at(move.dstSquareX) = (char) tolower(piece);
+        board.at(move.dstSquareY).at(move.dstSquareX) = (char) tolower(promote);
         board.at(move.originSquareY).at(move.originSquareX) = ' ';
     }
 }
