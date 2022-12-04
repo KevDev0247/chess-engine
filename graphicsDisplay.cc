@@ -5,6 +5,8 @@ GraphicsDisplay::GraphicsDisplay(Board *board) : BoardDisplay{board} {
   xw = nullptr;
 }
 
+
+
 void GraphicsDisplay::notify() {
   if (!xw) {
     xw = new Xwindow(400, 400);
@@ -19,7 +21,44 @@ void GraphicsDisplay::notify() {
         color = Xwindow::Brown;
       }
       xw->fillRectangle(j * 50, i * 50, 50, 50, color);
-      xw->drawString(j * 50, i * 50, std::string(1, board->getBoard()[j][i]));
+      char piece = board->getBoard()[j][i];
+      if (piece == 'k' || piece == 'K') {
+        if (piece == 'k') {
+            xw->fillRectangle(j * 50, i * 50, 50, 50, Xwindow::Red);
+        } else {
+            xw->fillRectangle(j * 50, i * 50, 50, 50, Xwindow::Blue);
+        }
+      } else if (piece == 'N' || piece == 'n') {
+        if (piece == 'n') {
+            xw->fillRectangle(j * 50 + 10, i * 50 + 10, 30, 30, Xwindow::Red);
+        } else {
+            xw->fillRectangle(j * 50 + 10, i * 50 + 10, 30, 30, Xwindow::Blue);
+        }
+      } else if (piece == 'p' || piece == 'P') {
+        if (piece == 'p') {
+            xw->fillRectangle(j * 50 + 20, i * 50 + 20, 10, 10, Xwindow::Red);
+        } else {
+            xw->fillRectangle(j * 50 + 20, i * 50 + 20, 10, 10, Xwindow::Blue);
+        }
+      } else if (piece == 'B' || piece == 'b') {
+        if (piece == 'b') {
+            xw->fillRectangle(j * 50 + 15, i * 50 + 15, 20, 20, Xwindow::Red);
+        } else {
+            xw->fillRectangle(j * 50 + 15, i * 50 + 15, 20, 20, Xwindow::Blue);
+        }
+      } else if (piece == 'R' || piece == 'r') {
+        if (piece == 'r') {
+            xw->fillRectangle(j * 50 + 15, i * 50 + 15, 20, 20, Xwindow::Red);
+        } else {
+            xw->fillRectangle(j * 50 + 15, i * 50 + 15, 20, 20, Xwindow::Blue);
+        }
+      } else if (piece == 'Q' || piece == 'q') {
+        if (piece == 'q') {
+            xw->fillRectangle(j * 50 + 15, i * 50 + 15, 20, 20, Xwindow::Red);
+        } else {
+            xw->fillRectangle(j * 50 + 15, i * 50 + 15, 20, 20, Xwindow::Blue);
+        }
+      }
     }
   }
 }
