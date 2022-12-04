@@ -10,5 +10,6 @@ Move LevelTwo::getMove() {
         if (board->baseCheckValidity(move) && baseCheckLevelTwo(move)) 
             levelTwoMoves.push_back(move);
     }
+    cout << levelTwoMoves.size() << endl;
     return levelTwoMoves.front();
 }

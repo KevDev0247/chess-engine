@@ -1,5 +1,7 @@
 #include "levelOne.h"
 #include "pieceMoveGen.h"
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 Move LevelOne::getMove() {
@@ -7,7 +9,15 @@ Move LevelOne::getMove() {
     
     vector<Move> levelOneMoves;
     for (auto move : moves) {
-        if (board->baseCheckValidity(move)) levelOneMoves.push_back(move);
+        if (board->baseCheckValidity(move)) 
+            levelOneMoves.push_back(move);
     }
-    return levelOneMoves.front();
+
+    srand((unsigned int)time(NULL));
+    int range = levelOneMoves.size();
+    int randomNum = rand() % range;
+
+    cout << " range is " << range << " random " << randomNum << endl;
+
+    return levelOneMoves.at(randomNum);
 }

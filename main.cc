@@ -59,8 +59,8 @@ void humanMove(string origin, string dest, Board* board, Human* human) {
 void computerMove(Computer *computer, Board *board) {
     Move newMove = computer->getMove();
     board->executeMove(newMove);
-    board->switchSide();
     board->notifyDisplays();
+    board->switchSide();
 }
 
 /* initialize a default board */
@@ -176,7 +176,7 @@ int main() {
                     }
                     turn = "White";
                 }
-                
+
                 if (board->inCheckmate()) {
                     if (board->getWhitePlaying()) {
                         cout << "Checkmate! Black wins!" << endl;
