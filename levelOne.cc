@@ -7,12 +7,18 @@ using namespace std;
 Move LevelOne::getMove() {
     srand((unsigned int)time(NULL));
     vector<Move> moves = board->getMoves();
+
+    vector<Move> validMoves;
+    for (auto move: moves) {
+        if (board->checkValidity(move)) 
+            validMoves.push_back(move);
+    }
     
     // push all valid moves into level 1
     vector<Move> levelOneMoves;
-    for (auto move : moves) {
-        if (board->baseCheckValidity(move)) 
-            levelOneMoves.push_back(move);
+    for (auto validMove : validMoves) {
+        if (board->checkValidity(validMove)) 
+            levelOneMoves.push_back(validMove);
     }
  
     // generate random number to choose in level 1 moves

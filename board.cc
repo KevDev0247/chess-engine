@@ -149,13 +149,21 @@ bool Board::inChecks() {
 bool Board::inCheckmate() {
     if (inChecks()) {
         int kingMoves = 0;
-        vector<Move> generatedMoves = getMoves();
-        for (auto move : generatedMoves) {
+        // vector<Move> generatedMoves = getMoves();
+        
+        vector<Move> validMoves;
+        vector<Move> boardMoves = getMoves();
+        for (auto boardMove: boardMoves) {
+            if (checkValidity(boardMove)) 
+                validMoves.push_back(boardMove);
+        }
+        for (auto move : validMoves) {
             char piece = board.at(move.originSquareY).at(move.originSquareX);
             if (piece == 'K' || piece == 'k') 
                 kingMoves++;
         }
 
+        cout << "king moves " << kingMoves << endl;
         // if king has no more valid moves when in check, it's a checkmate
         if (kingMoves == 0) return true;
     }
@@ -163,6 +171,41 @@ bool Board::inCheckmate() {
 }
 
 bool Board::baseCheckValidity(Move move) {
+    int dstX = move.dstSquareX;
+    int dstY = move.dstSquareY;
+    int originX = move.originSquareX;
+    int originY = move.originSquareY;
+
+    if (!(dstX >= 0 && dstX < 8 && dstY >= 0 && dstY < 8)) 
+        return false;
+
+    char originPiece = board.at(originY).at(originX);
+    char dstPiece = board.at(dstY).at(dstX);
+    int vertical = abs(originY - dstY);
+    int horizontal = abs(originX - dstX);
+
+    // check if moves for the wrong side or capturing piece from the same side
+    if (whitePlaying && isupper(dstPiece)) return false;
+    if (whitePlaying && islower(originPiece)) return false;
+    if (!whitePlaying && islower(dstPiece)) return false;
+    if (!whitePlaying && isupper(originPiece)) return false;
+
+    // check if pieces are moving according to rules
+    if ((originPiece == 'P' || originPiece == 'p') && !((horizontal == 0 && vertical == 2) || (horizontal == 0 && vertical == 1)
+                                                        || (horizontal == 1 && vertical == 1))) return false;
+    if ((originPiece == 'K' || originPiece == 'k') && !(horizontal == 1 || vertical == 1 ||
+                                                        (horizontal == 2 && vertical == 0) || (horizontal == 3 && vertical == 0))) return false;
+    if ((originPiece == 'Q' || originPiece == 'q') && !(horizontal == vertical || horizontal == 0 || vertical == 0)) return false;
+    if ((originPiece == 'R' || originPiece == 'r') && !(horizontal == 0 || vertical == 0)) return false;
+    if ((originPiece == 'B' || originPiece == 'b') && !(horizontal == vertical)) return false;
+    if ((originPiece == 'N' || originPiece == 'n') && !((horizontal == 2 && vertical == 1) || (horizontal == 1 && vertical == 2))) return false;
+
+    // Check if a king move places the king under attack
+
+    return true;
+}
+
+bool Board::checkValidity(Move move) {
     int dstX = move.dstSquareX;
     int dstY = move.dstSquareY;
     int originX = move.originSquareX;

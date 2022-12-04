@@ -48,6 +48,7 @@ class Board {
         bool getCanCastleWhite();
 
         bool baseCheckValidity(Move move);
+        bool checkValidity(Move move);
 };
 
 #endif

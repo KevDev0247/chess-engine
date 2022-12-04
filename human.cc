@@ -5,7 +5,12 @@
 using namespace std;
 
 bool Human::checkValidity(Move move) {
-    vector<Move> validMoves = board->getMoves();
+    vector<Move> validMoves;
+    vector<Move> boardMoves = board->getMoves();
+    for (auto boardMove: boardMoves) {
+        if (board->checkValidity(boardMove)) 
+            validMoves.push_back(boardMove);
+    }
     // cout << "white playing: " << board->getWhitePlaying() << endl;
     // cout << validMoves.size() << " moves generated" << endl;
     for (int i = 0; i < validMoves.size(); i++) {
