@@ -35,6 +35,7 @@ class Board {
         void removePiece(int row, int col);
         void executeMove(Move move);
         void executeCastle(Move move);
+        void executePromote(Move move);
         void switchSide();
 
         std::vector<std::vector<char>> getBoard();
