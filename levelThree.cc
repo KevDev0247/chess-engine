@@ -9,14 +9,14 @@ Move LevelThree::getMove() {
     // push all valid moves into level 1
     vector<Move> levelOneMoves;
     for (auto move : moves) {
-        if (board->baseCheckValidity(move)) 
+        if (board->checkValidity(move)) 
             levelOneMoves.push_back(move);
     }
 
     // push all capturing and checks moves into level 2
     vector<Move> levelTwoMoves;
     for (auto move : moves) {
-        if (board->baseCheckValidity(move) && baseCheckLevelTwo(move)) 
+        if (board->checkValidity(move) && baseCheckLevelTwo(move)) 
             levelTwoMoves.push_back(move);
     }
 
@@ -24,7 +24,7 @@ Move LevelThree::getMove() {
     // missing avoid checks
     vector<Move> levelThreeMoves;
     for (auto move : moves) {
-        if (board->baseCheckValidity(move) && baseCheckLevelTwo(move) && baseCheckLevelThree(move)) 
+        if (board->checkValidity(move) && baseCheckLevelTwo(move) && baseCheckLevelThree(move)) 
             levelThreeMoves.push_back(move);
     }
 

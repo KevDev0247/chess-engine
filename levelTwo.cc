@@ -9,7 +9,7 @@ Move LevelTwo::getMove() {
     // push all valid moves into level 1
     vector<Move> levelOneMoves;
     for (auto move : moves) {
-        if (board->baseCheckValidity(move)) 
+        if (board->checkValidity(move)) 
             levelOneMoves.push_back(move);
     }
 
@@ -17,7 +17,7 @@ Move LevelTwo::getMove() {
     // missing checks
     vector<Move> levelTwoMoves;
     for (auto move : moves) {
-        if (board->baseCheckValidity(move) && baseCheckLevelTwo(move)) 
+        if (board->checkValidity(move) && baseCheckLevelTwo(move)) 
             levelTwoMoves.push_back(move);
     }
 

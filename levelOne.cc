@@ -8,15 +8,15 @@ Move LevelOne::getMove() {
     srand((unsigned int)time(NULL));
     vector<Move> moves = board->getMoves();
 
-    vector<Move> validMoves;
-    for (auto move: moves) {
-        if (board->checkValidity(move)) 
-            validMoves.push_back(move);
-    }
+    // vector<Move> validMoves;
+    // for (auto move: moves) {
+    //     if (board->checkValidity(move)) 
+    //         validMoves.push_back(move);
+    // }
     
     // push all valid moves into level 1
     vector<Move> levelOneMoves;
-    for (auto validMove : validMoves) {
+    for (auto validMove : moves) {
         if (board->checkValidity(validMove)) 
             levelOneMoves.push_back(validMove);
     }

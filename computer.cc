@@ -14,12 +14,18 @@ bool Computer::baseCheckLevelTwo(Move move) {
     simulation->switchSide();
     vector<Move> simulationMoves = simulation->getMoves();
 
-    // if it's a check move, it satisfies level 2
-    for (auto simulationMove : simulationMoves) {
-        char piece = board->getBoard().at(simulationMove.dstSquareY).at(simulationMove.dstSquareX);
-        if (piece == 'K' || piece == 'k')
-            return true;
+    vector<Move> validMoves;
+    for (auto move: simulationMoves) {
+        if (board->checkValidity(move)) 
+            validMoves.push_back(move);
     }
+
+    // if it's a check move, it satisfies level 2
+    // for (auto validMove : validMoves) {
+    //     char piece = board->getBoard().at(validMove.dstSquareY).at(validMove.dstSquareX);
+    //     if (piece == 'K' || piece == 'k')
+    //         return true;
+    // }
 
     // if it's a capture move, it satisfies level 2
     if (board->getWhitePlaying() && islower(piece)) return true;
@@ -40,9 +46,15 @@ bool Computer::baseCheckLevelThree(Move move) {
     simulation->switchSide();
     vector<Move> simulationMoves = simulation->getMoves();
 
+    vector<Move> validMoves;
+    for (auto move: simulationMoves) {
+        if (board->checkValidity(move)) 
+            validMoves.push_back(move);
+    }
+
     // if a move result in a cgeck or the piece being captured, doesn't satisfy level 3
-    for (auto simulationMove : simulationMoves) {
-        if (simulationMove.dstSquareX == dstX && simulationMove.dstSquareY == dstY)
+    for (auto validMove : validMoves) {
+        if (validMove.dstSquareX == dstX && validMove.dstSquareY == dstY)
             return false;
         if (board->inChecks()) 
             return false;
