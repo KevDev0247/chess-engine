@@ -42,9 +42,9 @@ void GraphicsDisplay::notify() {
         }
       } else if (piece == 'B' || piece == 'b') {
         if (piece == 'b') {
-            xw->fillRectangle(j * 50 + 15, i * 50 + 15, 20, 20, Xwindow::Red);
+            xw->fillRectangle(j * 50 + 15, i * 50 + 15, 20, 20, Xwindow::Magenta);
         } else {
-            xw->fillRectangle(j * 50 + 15, i * 50 + 15, 20, 20, Xwindow::Blue);
+            xw->fillRectangle(j * 50 + 15, i * 50 + 15, 20, 20, Xwindow::Cyan);
         }
       } else if (piece == 'R' || piece == 'r') {
         if (piece == 'r') {
