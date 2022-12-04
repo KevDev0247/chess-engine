@@ -20,7 +20,7 @@ class Board {
     public:
         Board();
         Board(const Board &other);
-        ~Board() {};
+        ~Board();
 
         void displayBoard();
         void attachDisplay(BoardDisplay* display);
@@ -36,7 +36,7 @@ class Board {
         void switchSide();
 
         std::vector<std::vector<char>> getBoard();
-        std::vector<Move> getMoves();
+        std::vector<Move> getMoves(bool simulateCheck=true);
         std::vector<Move> legalMoves();
         MoveGen* getMoveGen();
         Move attacks();
@@ -47,7 +47,7 @@ class Board {
         bool getWhitePlaying();
         bool getCanCastleWhite();
 
-        bool baseCheckValidity(Move move);
+        bool baseCheckValidity(Move move, bool simulateCheck=true);
 };
 
 #endif

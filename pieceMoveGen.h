@@ -13,41 +13,41 @@ protected:
     MoveGen *next;
 public:
     PieceMoveGen(MoveGen* next, Board *board) : next{next}, MoveGen{board} {};
-    virtual std::vector<Move> getMoves();
+    virtual std::vector<Move> getMoves(bool simulateCheck);
     virtual ~PieceMoveGen();
 };
 
 class KnightMoveGen : public PieceMoveGen {
     using PieceMoveGen::PieceMoveGen;
-    std::vector<Move> getMoves() override;
+    std::vector<Move> getMoves(bool simulateCheck) override;
 };
 
 class KingMoveGen : public PieceMoveGen {
     using PieceMoveGen::PieceMoveGen;
-    std::vector<Move> getMoves() override;
+    std::vector<Move> getMoves(bool simulateCheck) override;
 };
 
 class PawnMoveGen : public PieceMoveGen {
     using PieceMoveGen::PieceMoveGen;
-    std::vector<Move> getMoves() override;
+    std::vector<Move> getMoves(bool simulateCheck) override;
 };
 
 
 class RookMoveGen : public PieceMoveGen {
     using PieceMoveGen::PieceMoveGen;
-    std::vector<Move> getMoves() override;
+    std::vector<Move> getMoves(bool simulateCheck) override;
 };
 
 
 class BishopMoveGen : public PieceMoveGen {
     using PieceMoveGen::PieceMoveGen;
-    std::vector<Move> getMoves() override;
+    std::vector<Move> getMoves(bool simulateCheck) override;
 };
 
 
 class QueenMoveGen : public PieceMoveGen {
     using PieceMoveGen::PieceMoveGen;
-    std::vector<Move> getMoves() override;
+    std::vector<Move> getMoves(bool simulateCheck) override;
 };
 
 void genRookMoves(

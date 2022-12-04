@@ -3,4 +3,4 @@ using namespace std;
 
 MoveGen::MoveGen(Board *board) : board{board} {}
 
-vector<Move> MoveGen::getMoves() {}
+vector<Move> MoveGen::getMoves(bool simulateCheck) {}

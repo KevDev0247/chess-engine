@@ -13,7 +13,7 @@ protected:
 public:
     MoveGen(Board *board);
 
-    std::vector<Move> virtual getMoves();
+    std::vector<Move> virtual getMoves(bool simulateCheck=true);
 };
 
 #endif

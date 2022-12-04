@@ -111,8 +111,8 @@ void Board::executeCastle(Move move) {
     }
 }
 
-std::vector<Move> Board::getMoves() {
-    return moveGen->getMoves();
+std::vector<Move> Board::getMoves(bool simulateCheck) {
+    return moveGen->getMoves(simulateCheck);
 }
 
 std::vector<std::vector<char>> Board::getBoard() {
@@ -137,19 +137,23 @@ bool Board::inChecks() {
     simulation->switchSide();
 
     // if the other side has a move that can capture the king, it is in check
-    vector<Move> generatedMoves = simulation->getMoves();
+    vector<Move> generatedMoves = simulation->getMoves(false);
     for (auto move : generatedMoves) {
         char piece = board.at(move.dstSquareY).at(move.dstSquareX);
-        if (piece == 'K' || piece == 'k') 
+        if (piece == 'K' || piece == 'k') {
+            delete simulation;
             return true;
+        }
     }
+
+    delete simulation;
     return false;
 }
 
 bool Board::inCheckmate() {
     if (inChecks()) {
         int kingMoves = 0;
-        vector<Move> generatedMoves = getMoves();
+        vector<Move> generatedMoves = getMoves(false);
         for (auto move : generatedMoves) {
             char piece = board.at(move.originSquareY).at(move.originSquareX);
             if (piece == 'K' || piece == 'k') 
@@ -162,7 +166,7 @@ bool Board::inCheckmate() {
     return false;
 }
 
-bool Board::baseCheckValidity(Move move) {
+bool Board::baseCheckValidity(Move move, bool simulateCheck) {
     int dstX = move.dstSquareX;
     int dstY = move.dstSquareY;
     int originX = move.originSquareX;
@@ -192,12 +196,19 @@ bool Board::baseCheckValidity(Move move) {
     if ((originPiece == 'B' || originPiece == 'b') && !(horizontal == vertical)) return false;
     if ((originPiece == 'N' || originPiece == 'n') && !((horizontal == 2 && vertical == 1) || (horizontal == 1 && vertical == 2))) return false;
 
-    // Check if a king move places the king under attack
-    if (originPiece == 'K' || originPiece == 'k') {
+    if (simulateCheck && (originPiece == 'K' || originPiece == 'k')) {
+        // Check if a move places the king under attack
         Board *simulation = new Board(*this);
         simulation->executeMove(move);
-        if (simulation->inChecks()) return false;
+        if (simulation->inChecks()) {
+            delete simulation;
+            return false;
+        }
     }
 
     return true;
+}
+
+Board::~Board() {
+    delete moveGen;
 }

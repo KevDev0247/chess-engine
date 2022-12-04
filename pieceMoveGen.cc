@@ -1,14 +1,14 @@
 #include "pieceMoveGen.h"
 using namespace std;
 
-vector<Move> PieceMoveGen::getMoves() {
-    return next->getMoves();
+vector<Move> PieceMoveGen::getMoves(bool simulateCheck) {
+    return next->getMoves(simulateCheck);
 }
 
 PieceMoveGen::~PieceMoveGen() { delete next; }
 
-vector<Move> KnightMoveGen::getMoves() {
-  vector<Move> result = next->getMoves();
+vector<Move> KnightMoveGen::getMoves(bool simulateCheck) {
+  vector<Move> result = next->getMoves(simulateCheck);
   auto boardArray = board->getBoard();
   bool white = board->getWhitePlaying();
   vector<Move> newMoves;
@@ -92,7 +92,7 @@ vector<Move> KnightMoveGen::getMoves() {
   }
 
   for (auto &i : newMoves) {
-    if (board->baseCheckValidity(i)) {
+    if (board->baseCheckValidity(i, simulateCheck)) {
       result.push_back(i);
     }
   }
@@ -100,8 +100,8 @@ vector<Move> KnightMoveGen::getMoves() {
 }
 
 
-vector<Move> RookMoveGen::getMoves() {
-  vector<Move> result = next->getMoves();
+vector<Move> RookMoveGen::getMoves(bool simulateCheck) {
+  vector<Move> result = next->getMoves(simulateCheck);
   auto boardArray = board->getBoard();
   bool white = board->getWhitePlaying();
   vector<Move> newMoves;
@@ -115,7 +115,7 @@ vector<Move> RookMoveGen::getMoves() {
   }
 
   for (auto &i : newMoves) {
-    if (board->baseCheckValidity(i)) {
+    if (board->baseCheckValidity(i, simulateCheck)) {
       result.push_back(i);
     }
   }
@@ -123,8 +123,8 @@ vector<Move> RookMoveGen::getMoves() {
 }
 
 
-vector<Move> BishopMoveGen::getMoves() {
-  vector<Move> result = next->getMoves();
+vector<Move> BishopMoveGen::getMoves(bool simulateCheck) {
+  vector<Move> result = next->getMoves(simulateCheck);
   auto boardArray = board->getBoard();
   bool white = board->getWhitePlaying();
   vector<Move> newMoves;
@@ -138,15 +138,15 @@ vector<Move> BishopMoveGen::getMoves() {
   }
 
   for (auto &i : newMoves) {
-    if (board->baseCheckValidity(i)) {
+    if (board->baseCheckValidity(i, simulateCheck)) {
       result.push_back(i);
     }
   }
   return result;
 }
 
-vector<Move> QueenMoveGen::getMoves() {
-  vector<Move> result = next->getMoves();
+vector<Move> QueenMoveGen::getMoves(bool simulateCheck) {
+  vector<Move> result = next->getMoves(simulateCheck);
   auto boardArray = board->getBoard();
   bool white = board->getWhitePlaying();
   vector<Move> newMoves;
@@ -161,15 +161,15 @@ vector<Move> QueenMoveGen::getMoves() {
   }
 
   for (auto &i : newMoves) {
-    if (board->baseCheckValidity(i)) {
+    if (board->baseCheckValidity(i, simulateCheck)) {
       result.push_back(i);
     }
   }
   return result;
 }
 
-vector<Move> PawnMoveGen::getMoves() {
-  vector<Move> result = next->getMoves();
+vector<Move> PawnMoveGen::getMoves(bool simulateCheck) {
+  vector<Move> result = next->getMoves(simulateCheck);
   auto boardArray = board->getBoard();
   bool white = board->getWhitePlaying();
   vector<Move> newMoves;
@@ -273,15 +273,15 @@ vector<Move> PawnMoveGen::getMoves() {
   }
 
   for (auto &i : newMoves) {
-    if (board->baseCheckValidity(i)) {
+    if (board->baseCheckValidity(i, simulateCheck)) {
       result.push_back(i);
     }
   }
   return result;
 }
 
-vector<Move> KingMoveGen::getMoves() {
-  vector<Move> result = next->getMoves();
+vector<Move> KingMoveGen::getMoves(bool simulateCheck) {
+  vector<Move> result = next->getMoves(simulateCheck);
   auto boardArray = board->getBoard();
   bool white = board->getWhitePlaying();
   vector<Move> newMoves;
@@ -372,7 +372,7 @@ vector<Move> KingMoveGen::getMoves() {
   }
 
   for (auto &i : newMoves) {
-    if (board->baseCheckValidity(i)) {
+    if (board->baseCheckValidity(i, simulateCheck)) {
       result.push_back(i);
     }
   }
