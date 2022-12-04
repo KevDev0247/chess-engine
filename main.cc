@@ -12,7 +12,7 @@
 using namespace std;
 
 /* read input and facilitate human move */
-void humanMove(string origin, string dest, Board* board, Human* human) {
+void humanMove(string origin, string dest, Board* board, Human* human, char promotion) {
     // cout << origin[1] << " " << origin[0] << " " << dest[1] << " " << dest[0] << endl;
 
     int originX = origin[0] - 'a';
@@ -40,12 +40,8 @@ void humanMove(string origin, string dest, Board* board, Human* human) {
 
     // if human move successful, switch side on board
     // else debugging for now
-    if ((newMove.piece == 'P' && destY == 0) {
-        board->executePromote(newMove);
-        board->switchSide();
-        board->notifyDisplays();
-    } else if ((newMove.piece == 'p' && destY == 7) {
-        board->executePromote(newMove);
+    if (promotion != ' ') {
+        board->executePromote(newMove, promotion);
         board->switchSide();
         board->notifyDisplays();
     } else if ((newMove.piece == 'k' || newMove.piece == 'K') && (abs(originX - destX) >= 2)) {
@@ -187,7 +183,11 @@ int main() {
                         string origin;
                         string dest;
                         ss >> origin >> dest;
-                        humanMove(origin, dest, board, human);
+                        char promotion;
+                        if (ss >> promotion) {
+                           humanMove(origin, dest, board, human, promotion);
+                        } else {
+                           humanMove(origin, dest, board, human, ' ');
                     } else {
                         // Computer generate a move and execute it
                         computerMove(whiteComputer, board);
@@ -199,7 +199,10 @@ int main() {
                         string origin;
                         string dest;
                         ss >> origin >> dest;
-                        humanMove(origin, dest, board, human);
+                        if (ss >> promotion) {
+                           humanMove(origin, dest, board, human, promotion);
+                        } else {
+                           humanMove(origin, dest, board, human, ' ');
                     } else {
                         // Computer generate a move and execute it
                         computerMove(blackComputer, board);
