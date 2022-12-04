@@ -142,11 +142,14 @@ bool Board::inChecks() {
 
 bool Board::inCheckmate() {
     if (inChecks()) {
-        // Board *simulation = new Board(*this);
-        // simulation->switchSide();
+        int kingMoves = 0;
         vector<Move> generatedMoves = getMoves();
-        cout << "size " << generatedMoves.size() << endl;
-        if (generatedMoves.size() == 0) return true;
+        for (auto move : generatedMoves) {
+            char piece = board.at(move.originSquareY).at(move.originSquareX);
+            if (piece == 'K' || piece =='k') 
+                kingMoves++;
+        }
+        if (kingMoves == 0) return true;
     }
     return false;
 }
@@ -180,6 +183,13 @@ bool Board::baseCheckValidity(Move move) {
     if ((originPiece == 'R' || originPiece == 'r') && !(horizontal == 0 || vertical == 0)) return false;
     if ((originPiece == 'B' || originPiece == 'b') && !(horizontal == vertical)) return false;
     if ((originPiece == 'N' || originPiece == 'n') && !((horizontal == 2 && vertical == 1) || (horizontal == 1 && vertical == 2))) return false;
+
+    if (originPiece == 'K' || originPiece == 'k') {
+        Board *simulation = new Board(*this);
+        simulation->executeMove(move);
+        if (simulation->inChecks()) return false;
+        else cout << move.dstSquareY << " " << move.dstSquareX << endl;
+    }
 
     return true;
 }
