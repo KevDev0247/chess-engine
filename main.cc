@@ -128,6 +128,7 @@ int main() {
                 if (!setup) initializeBoard(board);
 
                 // parse level input and reset type to "computer"
+                level = 0;
                 ss >> whiteType >> blackType;
                 if (whiteType != "human") {
                     level = whiteType[9] - '0';
