@@ -57,12 +57,24 @@ void humanMove(string origin, string dest, Board* board, Human* human) {
 
 /* computer generate a move */
 void computerMove(Computer *computer, Board *board) {
-    Move newMove = computer->getMove();
-    cout << "this move is from " << newMove.originSquareY << " " << newMove.originSquareX << "to " 
-        << newMove.dstSquareY << " " << newMove.dstSquareY << endl;
-    board->executeMove(newMove);
-    board->notifyDisplays();
-    board->switchSide();
+    vector<Move> moves = board->getMoves();
+    vector<Move> levelOneMoves;
+    for (auto validMove : moves) {
+        if (board->checkValidity(validMove)) 
+            levelOneMoves.push_back(validMove);
+    }
+    
+    if (!levelOneMoves.empty()) {
+        Move newMove = computer->getMove();
+        cout << "this move is from " << newMove.originSquareY << " " << newMove.originSquareX << "to " 
+            << newMove.dstSquareY << " " << newMove.dstSquareY << endl;
+        board->executeMove(newMove);
+        board->notifyDisplays();
+        board->switchSide();        
+    } else {
+        cout << "tie" << endl;
+        board->notifyDisplays();
+    }
 }
 
 /* initialize a default board */

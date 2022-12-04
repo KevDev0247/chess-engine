@@ -22,13 +22,13 @@ Move LevelTwo::getMove() {
     }
 
     // if no level 2 moves available, perform level 1 moves
-    if (levelTwoMoves.size() == 0) {
-        int range = levelOneMoves.size();
-        int randomNum = rand() % range;
-        return levelOneMoves.at(randomNum);
-    } else {
+    if (levelTwoMoves.size() != 0) {
         int range = levelTwoMoves.size();
         int randomNum = rand() % range;
         return levelTwoMoves.at(randomNum);
+    } else {
+        int range = levelOneMoves.size();
+        int randomNum = rand() % range;
+        return levelOneMoves.at(randomNum);        
     }
 }

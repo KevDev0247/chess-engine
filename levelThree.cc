@@ -41,6 +41,6 @@ Move LevelThree::getMove() {
     } else {
         int range = levelOneMoves.size();
         int randomNum = rand() % range;
-        return levelOneMoves.at(randomNum);      
+        return levelOneMoves.at(randomNum);         
     }
 }
