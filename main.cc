@@ -188,6 +188,7 @@ int main() {
                            humanMove(origin, dest, board, human, promotion);
                         } else {
                            humanMove(origin, dest, board, human, ' ');
+                        }
                     } else {
                         // Computer generate a move and execute it
                         computerMove(whiteComputer, board);
@@ -199,10 +200,12 @@ int main() {
                         string origin;
                         string dest;
                         ss >> origin >> dest;
+                        char promotion;
                         if (ss >> promotion) {
                            humanMove(origin, dest, board, human, promotion);
                         } else {
                            humanMove(origin, dest, board, human, ' ');
+                        }
                     } else {
                         // Computer generate a move and execute it
                         computerMove(blackComputer, board);
