@@ -116,6 +116,16 @@ void Board::executeCastle(Move move) {
     }
 }
 
+void Board::executePromote(Move move, char piece) {
+    if (move.piece == 'P') {
+        board.at(move.dstSquareY).at(move.dstSquareX) = (char) toupper(piece);
+        board.at(move.originSquareY).at(move.originSquareX) = ' ';
+    } else {
+        board.at(move.dstSquareY).at(move.dstSquareX) = (char) tolower(piece);
+        board.at(move.originSquareY).at(move.originSquareX) = ' ';
+    }
+}
+
 std::vector<Move> Board::getMoves() {
     return moveGen->getMoves();
 }
