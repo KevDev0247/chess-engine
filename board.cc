@@ -151,6 +151,7 @@ bool Board::inChecks() {
             return true;
         }
     }
+    delete simulation;
     return false;
 }
 
@@ -220,6 +221,7 @@ bool Board::checkValidity(Move move) {
         Board *simulation = new Board(*this);
         simulation->executeMove(move);
         if (simulation->inChecks()) return false;
+        delete simulation;
     }
 
     // this is detecting the wrong piece shud be next next round
