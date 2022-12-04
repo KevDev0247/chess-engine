@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -Werror=vla -std=c++14 -g -Wall -MMD
+CXXFLAGS = -Werror=vla -std=c++14 -g -Wall -MMD -L/opt/X11/lib -I/opt/X11/include -I/opt/X11/lib
 EXEC = chess 
 OBJECTS = graphicsDisplay.o window.o move.o player.o moveGen.o emptyMoveGen.o board.o human.o computer.o pieceMoveGen.o levelOne.o levelTwo.o levelThree.o textDisplay.o main.o
 DEPENDS = ${OBJECTS:.o=.d}
