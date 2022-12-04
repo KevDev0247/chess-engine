@@ -1,6 +1,5 @@
 #include "board.h"
 #include "pieceMoveGen.h"
-#include "emptyMoveGen.h"
 #include <vector>
 #include <iostream>
 using namespace std;
@@ -16,7 +15,7 @@ Board::Board() : whitePlaying{true}, canCastleWhite{false}, whiteInCheck{false},
     }
 
     // Utilize decorator pattern on move generators
-    KingMoveGen *kingMoveGen = new KingMoveGen(new EmptyMoveGen(this), this);
+    KingMoveGen *kingMoveGen = new KingMoveGen(nullptr, this);
     QueenMoveGen *queenMoveGen = new QueenMoveGen(kingMoveGen, this);
     KnightMoveGen *knightMoveGen = new KnightMoveGen(queenMoveGen, this);
     RookMoveGen *rookMoveGen = new RookMoveGen(knightMoveGen, this);
@@ -40,7 +39,7 @@ Board::Board(const Board &other) :
     }
 
     // Utilize decorator pattern on move generators
-    KingMoveGen *kingMoveGen = new KingMoveGen(new EmptyMoveGen(this), this);
+    KingMoveGen *kingMoveGen = new KingMoveGen(nullptr, this);
     QueenMoveGen *queenMoveGen = new QueenMoveGen(kingMoveGen, this);
     KnightMoveGen *knightMoveGen = new KnightMoveGen(queenMoveGen, this);
     RookMoveGen *rookMoveGen = new RookMoveGen(knightMoveGen, this);
@@ -48,6 +47,10 @@ Board::Board(const Board &other) :
     PawnMoveGen *pawnMoveGen = new PawnMoveGen(bishopMoveGen, this);
 
     this->moveGen = pawnMoveGen;
+}
+
+Board::~Board() {
+    delete moveGen;
 }
 
 bool Board::setPieceOnBoard(int row, int col, char piece) {

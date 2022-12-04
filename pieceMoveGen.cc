@@ -281,7 +281,10 @@ vector<Move> PawnMoveGen::getMoves() {
 }
 
 vector<Move> KingMoveGen::getMoves() {
-  vector<Move> result = next->getMoves();
+  vector<Move> result;
+  if (next) {
+    result = next->getMoves();
+  }
   auto boardArray = board->getBoard();
   bool white = board->getWhitePlaying();
   vector<Move> newMoves;

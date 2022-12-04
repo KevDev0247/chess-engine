@@ -10,9 +10,9 @@ using namespace std;
 
 class PieceMoveGen : public MoveGen {
 protected:
-    MoveGen *next;
+    PieceMoveGen *next;
 public:
-    PieceMoveGen(MoveGen* next, Board *board) : next{next}, MoveGen{board} {};
+    PieceMoveGen(PieceMoveGen* next, Board *board) : next{next}, MoveGen{board} {};
     virtual std::vector<Move> getMoves();
     virtual ~PieceMoveGen();
 };

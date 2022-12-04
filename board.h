@@ -22,7 +22,7 @@ class Board {
     public:
         Board();
         Board(const Board &other);
-        ~Board() {};
+        ~Board();
 
         void displayBoard();
         void attachDisplay(BoardDisplay* display);
