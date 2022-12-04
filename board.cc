@@ -144,10 +144,12 @@ bool Board::inChecks() {
         char piece = board.at(move.dstSquareY).at(move.dstSquareX);
         if (piece == 'K') {
             whiteInCheck = true;
+            delete simulation;
             return true;
         }
         if (piece == 'k') {
             blackInCheck = true;
+            delete simulation;
             return true;
         }
     }
@@ -220,7 +222,10 @@ bool Board::checkValidity(Move move) {
     if (originPiece == 'K' || originPiece == 'k') {
         Board *simulation = new Board(*this);
         simulation->executeMove(move);
-        if (simulation->inChecks()) return false;
+        if (simulation->inChecks()) {
+            delete simulation;
+            return false;
+        }
         delete simulation;
     }
 
