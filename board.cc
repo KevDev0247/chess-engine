@@ -26,13 +26,12 @@ Board::Board() {
 }
 
 Board::Board(const Board &other) : whitePlaying{other.whitePlaying}, canCastleWhite{other.canCastleWhite} {
-    Board *newBoard = new Board();
     for (auto row : other.board) {
         vector<char> newRow;
         for (auto col : row) {
             newRow.push_back(col);
         }
-        newBoard->getBoard().push_back(newRow);
+        board.push_back(newRow);
     }
 }
 
@@ -121,7 +120,9 @@ bool Board::getCanCastleWhite() {
 
 bool Board::inChecks() {
     Board *simulation{this};
+    cout << "white playing: " << whitePlaying << endl;
     simulation->switchSide();
+    cout << "white playing: " << whitePlaying << endl;
     vector<Move> generatedMoves = simulation->getMoves();
 
     for (auto move : generatedMoves) {

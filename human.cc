@@ -6,7 +6,7 @@ using namespace std;
 
 bool Human::checkValidity(Move move) {
     vector<Move> validMoves = board->getMoves();
-    cout << "white playing: " << board->getWhitePlaying() << endl;
+    // cout << "white playing: " << board->getWhitePlaying() << endl;
     cout << validMoves.size() << " moves generated" << endl;
     for (int i = 0; i < validMoves.size(); i++) {
         Move curr = validMoves.at(i);
