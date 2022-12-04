@@ -245,6 +245,7 @@ int main() {
     delete graphicsDisplay;
     delete board;
     if (computer) delete computer;
+    delete human;
     
     return 0;
 }
