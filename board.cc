@@ -6,6 +6,7 @@
 using namespace std;
 
 Board::Board() {
+    // initialize an empty board
     for (int i = 0; i < 8; i++) {
         vector<char> row;
         for (int i = 0; i < 8; i++) {
@@ -14,6 +15,7 @@ Board::Board() {
         board.push_back(row);
     }
 
+    // Utilize decorator pattern on move generators
     KingMoveGen *kingMoveGen = new KingMoveGen(new EmptyMoveGen(this), this);
     QueenMoveGen *queenMoveGen = new QueenMoveGen(kingMoveGen, this);
     KnightMoveGen *knightMoveGen = new KnightMoveGen(queenMoveGen, this);
@@ -26,6 +28,7 @@ Board::Board() {
 }
 
 Board::Board(const Board &other) : whitePlaying{other.whitePlaying}, canCastleWhite{other.canCastleWhite} {
+    // Perform deep copy of the board
     for (auto row : other.board) {
         vector<char> newRow;
         for (auto col : row) {
@@ -34,6 +37,7 @@ Board::Board(const Board &other) : whitePlaying{other.whitePlaying}, canCastleWh
         board.push_back(newRow);
     }
 
+    // Utilize decorator pattern on move generators
     KingMoveGen *kingMoveGen = new KingMoveGen(new EmptyMoveGen(this), this);
     QueenMoveGen *queenMoveGen = new QueenMoveGen(kingMoveGen, this);
     KnightMoveGen *knightMoveGen = new KnightMoveGen(queenMoveGen, this);
@@ -128,10 +132,12 @@ bool Board::getCanCastleWhite() {
 }
 
 bool Board::inChecks() {
+    // Start a simulation by switching sides
     Board *simulation = new Board(*this);
     simulation->switchSide();
-    vector<Move> generatedMoves = simulation->getMoves();
 
+    // if the other side has a move that can capture the king, it is in check
+    vector<Move> generatedMoves = simulation->getMoves();
     for (auto move : generatedMoves) {
         char piece = board.at(move.dstSquareY).at(move.dstSquareX);
         if (piece == 'K' || piece == 'k') 
@@ -146,9 +152,11 @@ bool Board::inCheckmate() {
         vector<Move> generatedMoves = getMoves();
         for (auto move : generatedMoves) {
             char piece = board.at(move.originSquareY).at(move.originSquareX);
-            if (piece == 'K' || piece =='k') 
+            if (piece == 'K' || piece == 'k') 
                 kingMoves++;
         }
+
+        // if king has no more valid moves when in check, it's a checkmate
         if (kingMoves == 0) return true;
     }
     return false;
@@ -167,14 +175,14 @@ bool Board::baseCheckValidity(Move move) {
     char dstPiece = board.at(dstY).at(dstX);
     int vertical = abs(originY - dstY);
     int horizontal = abs(originX - dstX);
-    // cout << originPiece << ' ' << dstPiece << endl;
 
+    // check if moves for the wrong side or capturing piece from the same side
     if (whitePlaying && isupper(dstPiece)) return false;
     if (whitePlaying && islower(originPiece)) return false;
     if (!whitePlaying && islower(dstPiece)) return false;
     if (!whitePlaying && isupper(originPiece)) return false;
-    // cout << vertical << ' ' << horizontal << endl;
 
+    // check if pieces are moving according to rules
     if ((originPiece == 'P' || originPiece == 'p') && !((horizontal == 0 && vertical == 2) || (horizontal == 0 && vertical == 1)
                                                         || (horizontal == 1 && vertical == 1))) return false;
     if ((originPiece == 'K' || originPiece == 'k') && !(horizontal == 1 || vertical == 1 ||
@@ -184,11 +192,11 @@ bool Board::baseCheckValidity(Move move) {
     if ((originPiece == 'B' || originPiece == 'b') && !(horizontal == vertical)) return false;
     if ((originPiece == 'N' || originPiece == 'n') && !((horizontal == 2 && vertical == 1) || (horizontal == 1 && vertical == 2))) return false;
 
+    // Check if a king move places the king under attack
     if (originPiece == 'K' || originPiece == 'k') {
         Board *simulation = new Board(*this);
         simulation->executeMove(move);
         if (simulation->inChecks()) return false;
-        else cout << move.dstSquareY << " " << move.dstSquareX << endl;
     }
 
     return true;

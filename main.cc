@@ -176,10 +176,22 @@ int main() {
                     }
                     turn = "White";
                 }
-
-                // debugging
-                if (board->inChecks()) cout << "in check" << endl;
-                if (board->inCheckmate()) cout << "in checkmate" << endl;
+                
+                if (board->inCheckmate()) {
+                    if (board->getWhitePlaying()) {
+                        cout << "Checkmate! Black wins!" << endl;
+                    } else {
+                        cout << "Checkmate! White wins!" << endl;
+                    }
+                    break;
+                }
+                if (board->inChecks()) {
+                    if (board->getWhitePlaying()) {
+                        cout << "White is in check." << endl;
+                    } else {
+                        cout << "Black is in check." << endl;
+                    }
+                }
             }
             if (command == "setup") {
                 setup = true;
