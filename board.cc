@@ -222,10 +222,19 @@ bool Board::checkValidity(Move move) {
         if (simulation->inChecks()) return false;
     }
 
-    // cout << "origin " << originPiece << endl;
     // this is detecting the wrong piece shud be next next round
     if (whitePlaying && whiteInCheck && originPiece != 'K') return false;
     if (!whitePlaying && blackInCheck && originPiece != 'k') return false;
+
+    if (originPiece == 'Q' || originPiece == 'q') {
+        // check pieces in the middle
+    }
+    if (originPiece == 'R' || originPiece == 'r') {
+        // check pieces in the middle
+    }
+    if (originPiece == 'B' || originPiece == 'b') {
+        // check pieces in the middle
+    }
 
     return true;
 }
