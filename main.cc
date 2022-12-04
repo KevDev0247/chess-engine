@@ -58,6 +58,8 @@ void humanMove(string origin, string dest, Board* board, Human* human) {
 /* computer generate a move */
 void computerMove(Computer *computer, Board *board) {
     Move newMove = computer->getMove();
+    cout << "this move is from " << newMove.originSquareY << " " << newMove.originSquareX << "to " 
+        << newMove.dstSquareY << " " << newMove.dstSquareY << endl;
     board->executeMove(newMove);
     board->notifyDisplays();
     board->switchSide();

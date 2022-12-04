@@ -5,6 +5,8 @@ using namespace std;
 Move LevelTwo::getMove() {
     vector<Move> moves = board->getMoves();
 
+    // at the start of the game, shud use level one moves
+
     vector<Move> levelTwoMoves;
     for (auto move : moves) {
         if (board->baseCheckValidity(move) && baseCheckLevelTwo(move)) 
