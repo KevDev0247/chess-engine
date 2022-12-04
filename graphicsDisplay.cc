@@ -30,9 +30,9 @@ void GraphicsDisplay::notify() {
         }
       } else if (piece == 'N' || piece == 'n') {
         if (piece == 'n') {
-            xw->fillRectangle(j * 50 + 10, i * 50 + 10, 30, 30, Xwindow::Red);
+            xw->fillRectangle(j * 50 + 10, i * 50 + 10, 30, 25, Xwindow::Red);
         } else {
-            xw->fillRectangle(j * 50 + 10, i * 50 + 10, 30, 30, Xwindow::Blue);
+            xw->fillRectangle(j * 50 + 10, i * 50 + 10, 30, 25, Xwindow::Blue);
         }
       } else if (piece == 'p' || piece == 'P') {
         if (piece == 'p') {
@@ -42,21 +42,21 @@ void GraphicsDisplay::notify() {
         }
       } else if (piece == 'B' || piece == 'b') {
         if (piece == 'b') {
-            xw->fillRectangle(j * 50 + 15, i * 50 + 15, 20, 20, Xwindow::Magenta);
+            xw->fillRectangle(j * 50 + 15, i * 50 + 15, 20, 20, Xwindow::Red);
         } else {
-            xw->fillRectangle(j * 50 + 15, i * 50 + 15, 20, 20, Xwindow::Cyan);
+            xw->fillRectangle(j * 50 + 15, i * 50 + 15, 20, 20, Xwindow::Blue);
         }
       } else if (piece == 'R' || piece == 'r') {
         if (piece == 'r') {
-            xw->fillRectangle(j * 50 + 15, i * 50 + 15, 20, 20, Xwindow::Red);
+            xw->fillRectangle(j * 50 + 15, i * 50 + 15, 20, 30, Xwindow::Red);
         } else {
-            xw->fillRectangle(j * 50 + 15, i * 50 + 15, 20, 20, Xwindow::Blue);
+            xw->fillRectangle(j * 50 + 15, i * 50 + 15, 20, 30, Xwindow::Blue);
         }
       } else if (piece == 'Q' || piece == 'q') {
         if (piece == 'q') {
-            xw->fillRectangle(j * 50 + 15, i * 50 + 15, 20, 20, Xwindow::Red);
+            xw->fillRectangle(j * 50 + 15, i * 50 + 15, 20, 40, Xwindow::Red);
         } else {
-            xw->fillRectangle(j * 50 + 15, i * 50 + 15, 20, 20, Xwindow::Blue);
+            xw->fillRectangle(j * 50 + 15, i * 50 + 15, 20, 40, Xwindow::Blue);
         }
       }
     }
