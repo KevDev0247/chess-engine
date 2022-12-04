@@ -105,7 +105,7 @@ int main() {
     GraphicsDisplay *graphicsDisplay = new GraphicsDisplay(board);
 
     Human *human = new Human(board);
-    Computer *computer;
+    Computer *computer = nullptr;
 
     int whiteScore = 0, blackscore = 0;
     int level;
@@ -244,6 +244,7 @@ int main() {
     delete textDisplay;
     delete graphicsDisplay;
     delete board;
+    if (computer) delete computer;
     
     return 0;
 }
