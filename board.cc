@@ -33,6 +33,15 @@ Board::Board(const Board &other) : whitePlaying{other.whitePlaying}, canCastleWh
         }
         board.push_back(newRow);
     }
+
+    KingMoveGen *kingMoveGen = new KingMoveGen(new EmptyMoveGen(this), this);
+    QueenMoveGen *queenMoveGen = new QueenMoveGen(kingMoveGen, this);
+    KnightMoveGen *knightMoveGen = new KnightMoveGen(queenMoveGen, this);
+    RookMoveGen *rookMoveGen = new RookMoveGen(knightMoveGen, this);
+    BishopMoveGen *bishopMoveGen = new BishopMoveGen(rookMoveGen, this);
+    PawnMoveGen *pawnMoveGen = new PawnMoveGen(bishopMoveGen, this);
+
+    this->moveGen = pawnMoveGen;
 }
 
 bool Board::setPieceOnBoard(int row, int col, char piece) {
@@ -119,27 +128,24 @@ bool Board::getCanCastleWhite() {
 }
 
 bool Board::inChecks() {
-    Board *simulation{this};
-    cout << "white playing: " << whitePlaying << endl;
+    Board *simulation = new Board(*this);
     simulation->switchSide();
-    cout << "white playing: " << whitePlaying << endl;
     vector<Move> generatedMoves = simulation->getMoves();
 
     for (auto move : generatedMoves) {
         char piece = board.at(move.dstSquareY).at(move.dstSquareX);
-        if (piece == 'K' || piece == 'k') {
-            cout << piece << " is at " << move.dstSquareY << " " << move.dstSquareX << endl;
-            return true;            
-        }
+        if (piece == 'K' || piece == 'k') 
+            return true;
     }
     return false;
 }
 
 bool Board::inCheckmate() {
     if (inChecks()) {
-        Board *simulation{this};
-        simulation->switchSide();
-        vector<Move> generatedMoves = simulation->getMoves();
+        // Board *simulation = new Board(*this);
+        // simulation->switchSide();
+        vector<Move> generatedMoves = getMoves();
+        cout << "size " << generatedMoves.size() << endl;
         if (generatedMoves.size() == 0) return true;
     }
     return false;

@@ -23,8 +23,8 @@ void humanMove(string origin, string dest, Board* board, Human* human) {
     destY = 7 - destY;
     char piece = board->getBoard().at(originY).at(originX);
 
-    cout << "origin " << originY << " " << originX << endl;
-    cout << "dest " << destY << " " << destX << endl;
+    // cout << "origin " << originY << " " << originX << endl;
+    // cout << "dest " << destY << " " << destX << endl;
 
     // create a new move and check its validity
     Move newMove = {
@@ -179,7 +179,7 @@ int main() {
 
                 // debugging
                 if (board->inChecks()) cout << "in check" << endl;
-                // if (board->inCheckmate()) cout << "in checkmate" << endl;
+                if (board->inCheckmate()) cout << "in checkmate" << endl;
             }
             if (command == "setup") {
                 setup = true;
