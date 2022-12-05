@@ -170,6 +170,10 @@ bool Board::inChecks() {
     return false;
 }
 
+bool Board::inStalemate() {
+    return !inCheckmate() && getMoves().size() == 0;
+}
+
 bool Board::inCheckmate() {
     if (inChecks()) {
         int kingMoves = 0;

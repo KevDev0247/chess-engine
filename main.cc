@@ -76,10 +76,12 @@ void computerMove(Computer *computer, Board *board) {
         board->notifyDisplays();
         board->switchSide();        
     }
+    /*
     if (levelOneMoves.empty() && !board->inCheckmate() && !board->inChecks()) {
         cout << "tie" << endl;
         board->notifyDisplays();
     }
+    */
 }
 
 /* initialize a default board */
@@ -212,7 +214,14 @@ int main() {
                     }
                     turn = "White";
                 }
-
+                if (board->inStalemate()) {
+                    if (board->getWhitePlaying()) {
+                        cout << "Stalemate! It is a draw." << endl;
+                    } else {
+                        cout << "Stalemate! It is a draw." << endl;
+                    }
+                    break;
+                }
                 if (board->inCheckmate()) {
                     if (board->getWhitePlaying()) {
                         cout << "Checkmate! Black wins!" << endl;

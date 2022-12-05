@@ -45,6 +45,7 @@ class Board {
         Move attacks();
         bool inChecks();
         bool inCheckmate();
+        bool inStalemate();
         bool causeCheck();
         std::string getFEN();
         bool getWhitePlaying();
