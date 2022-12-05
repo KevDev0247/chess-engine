@@ -23,8 +23,7 @@ bool Human::checkValidity(Move move) {
             curr.moveType == move.moveType &&
             curr.originSquareX == move.originSquareX &&
             curr.originSquareY == move.originSquareY &&
-            curr.piece == move.piece &&
-            curr.promotionPiece == move.promotionPiece) 
+            curr.piece == move.piece) 
             return true;
     }
     return false;
