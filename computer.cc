@@ -28,10 +28,10 @@ bool Computer::baseCheckLevelTwo(Move move) {
     // }
 
     // if it's a capture move, it satisfies level 2
+    delete simulation;
+
     if (board->getWhitePlaying() && islower(piece)) return true;
     if (!board->getWhitePlaying() && isupper(piece)) return true;
-
-    delete simulation;
 
     return false;
 }
