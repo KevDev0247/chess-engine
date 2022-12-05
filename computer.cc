@@ -20,13 +20,6 @@ bool Computer::baseCheckLevelTwo(Move move) {
             validMoves.push_back(move);
     }
 
-    // if it's a check move, it satisfies level 2
-    // for (auto validMove : validMoves) {
-    //     char piece = board->getBoard().at(validMove.dstSquareY).at(validMove.dstSquareX);
-    //     if (piece == 'K' || piece == 'k')
-    //         return true;
-    // }
-
     // if it's a capture move, it satisfies level 2
     delete simulation;
 
@@ -61,7 +54,5 @@ bool Computer::baseCheckLevelThree(Move move) {
         if (board->inChecks()) 
             return false;
     }
-        
-    
     return true;
 }

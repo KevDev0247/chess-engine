@@ -24,5 +24,3 @@ bool Human::checkValidity(Move move) {
     }
     return false;
 }
-
- 
