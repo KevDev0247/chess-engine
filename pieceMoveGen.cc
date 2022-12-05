@@ -251,7 +251,7 @@ vector<Move> PawnMoveGen::getMoves() {
             j,
             i,
             j + 1,
-            i + 1,
+            i - 1,
             ' ',
             boardArray[i][j],
             MoveType::Normal
