@@ -11,12 +11,8 @@ bool Human::checkValidity(Move move) {
         if (board->checkValidity(boardMove)) 
             validMoves.push_back(boardMove);
     }
-    // cout << "white playing: " << board->getWhitePlaying() << endl;
-    // cout << validMoves.size() << " moves generated" << endl;
     for (int i = 0; i < validMoves.size(); i++) {
         Move curr = validMoves.at(i);
-        // cout << curr.dstSquareY << " " << curr.dstSquareX << endl;
-
         // if a move is among the valid moves generated, it is valid
         if (curr.dstSquareX == move.dstSquareX &&
             curr.dstSquareY == move.dstSquareY &&

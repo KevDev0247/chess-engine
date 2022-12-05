@@ -203,7 +203,6 @@ bool Board::inStalemate() {
 bool Board::inCheckmate() {
     if (inChecks()) {
         int kingMoves = 0;
-        // vector<Move> generatedMoves = getMoves();
         
         vector<Move> validMoves;
         vector<Move> boardMoves = getMoves();
@@ -217,7 +216,6 @@ bool Board::inCheckmate() {
                 kingMoves++;
         }
 
-        cout << "king moves " << kingMoves << endl;
         // if king has no more valid moves when in check, it's a checkmate
         if (kingMoves == 0) return true;
     }
@@ -275,16 +273,6 @@ bool Board::checkValidity(Move move) {
     // this is detecting the wrong piece shud be next next round
     if (whitePlaying && whiteInCheck && originPiece != 'K') return false;
     if (!whitePlaying && blackInCheck && originPiece != 'k') return false;
-
-    if (originPiece == 'Q' || originPiece == 'q') {
-        // check pieces in the middle
-    }
-    if (originPiece == 'R' || originPiece == 'r') {
-        // check pieces in the middle
-    }
-    if (originPiece == 'B' || originPiece == 'b') {
-        // check pieces in the middle
-    }
 
     return true;
 }

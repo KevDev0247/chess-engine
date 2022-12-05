@@ -13,8 +13,6 @@ using namespace std;
 
 /* read input and facilitate human move */
 void humanMove(string origin, string dest, Board* board, Human* human, char promotion) {
-    // cout << origin[1] << " " << origin[0] << " " << dest[1] << " " << dest[0] << endl;
-
     int originX = origin[0] - 'a';
     int originY = origin[1] - '1';
     originY = 7 - originY;
@@ -22,9 +20,6 @@ void humanMove(string origin, string dest, Board* board, Human* human, char prom
     int destY = dest[1] - '1';
     destY = 7 - destY;
     char piece = board->getBoard().at(originY).at(originX);
-
-    // cout << "origin " << originY << " " << originX << endl;
-    // cout << "dest " << destY << " " << destX << endl;
 
     // create a new move and check its validity
     Move newMove = {
@@ -114,7 +109,6 @@ void initializeBoard(Board *board) {
 
 int main() {
     string input;
-    // Can encapsulate all of this information in the Game class for better style
     string whiteType;
     string blackType;
     string turn = "White";

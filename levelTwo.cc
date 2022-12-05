@@ -14,7 +14,6 @@ Move LevelTwo::getMove() {
     }
 
     // push all capturing and checks moves into level 2
-    // missing checks
     vector<Move> levelTwoMoves;
     for (auto move : moves) {
         if (board->checkValidity(move) && baseCheckLevelTwo(move)) 
