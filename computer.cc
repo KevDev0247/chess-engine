@@ -52,6 +52,8 @@ bool Computer::baseCheckLevelThree(Move move) {
             validMoves.push_back(move);
     }
 
+    delete simulation;
+    
     // if a move result in a cgeck or the piece being captured, doesn't satisfy level 3
     for (auto validMove : validMoves) {
         if (validMove.dstSquareX == dstX && validMove.dstSquareY == dstY)
@@ -60,7 +62,6 @@ bool Computer::baseCheckLevelThree(Move move) {
             return false;
     }
         
-    delete simulation;
     
     return true;
 }
