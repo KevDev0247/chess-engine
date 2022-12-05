@@ -215,11 +215,11 @@ int main() {
                     turn = "White";
                 }
                 if (board->inStalemate()) {
-                    if (board->getWhitePlaying()) {
-                        cout << "Stalemate! It is a draw." << endl;
-                    } else {
-                        cout << "Stalemate! It is a draw." << endl;
-                    }
+                    cout << "Stalemate! It is a draw." << endl;
+                    break;
+                }
+                if (board->insufficientMaterial()) {
+                    cout << "Insufficient material! It is a draw." << endl;
                     break;
                 }
                 if (board->inCheckmate()) {

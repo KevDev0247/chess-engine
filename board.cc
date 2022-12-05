@@ -146,6 +146,32 @@ bool Board::getCanCastleWhite() {
     return canCastleWhite;
 }
 
+
+bool Board::insufficientMaterial() {
+    int whitePawns = 0;
+    int blackPawns = 0;
+    int whiteRooks = 0;
+    int blackRooks = 0;
+    int whiteQueens = 0;
+    int blackQueens = 0;
+
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            char piece = board.at(i).at(j);
+            if (piece == 'p') blackPawns++;
+            if (piece == 'P') whitePawns++;
+            if (piece == 'r') blackRooks++;
+            if (piece == 'R') whiteRooks++;
+            if (piece == 'q') blackQueens++;
+            if (piece == 'Q') whiteQueens++;
+        }
+    }
+    if ((whitePawns == 0 && blackPawns == 0) && (whiteRooks == 0 && blackRooks == 0) && (whiteQueens == 0 && blackQueens == 0)) {
+        return true;
+    }
+}
+
+
 bool Board::inChecks() {
     // Start a simulation by switching sides
     Board *simulation = new Board(*this);
