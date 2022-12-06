@@ -49,8 +49,6 @@ void humanMove(string origin, string dest, Board* board, Human* human, char prom
         board->notifyDisplays();
     } else {
         cout << "bad move" << endl;
-        // debugging
-        board->notifyDisplays();
     }
 }
 
@@ -65,8 +63,6 @@ void computerMove(Computer *computer, Board *board) {
 
     if (!levelOneMoves.empty()) {
         Move newMove = computer->getMove();
-        cout << "this move is from " << newMove.originSquareY << " " << newMove.originSquareX << "to " 
-            << newMove.dstSquareY << " " << newMove.dstSquareY << endl;
         board->executeMove(newMove);
         board->notifyDisplays();
         board->switchSide();        
