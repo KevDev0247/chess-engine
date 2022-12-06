@@ -169,6 +169,7 @@ bool Board::insufficientMaterial() {
     if ((whitePawns == 0 && blackPawns == 0) && (whiteRooks == 0 && blackRooks == 0) && (whiteQueens == 0 && blackQueens == 0)) {
         return true;
     }
+    return false;
 }
 
 
