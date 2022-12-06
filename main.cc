@@ -121,7 +121,7 @@ int main() {
     Computer *whiteComputer = nullptr;
     Computer *blackComputer = nullptr;
 
-    int whiteScore = 0, blackscore = 0;
+    int whiteScore = 0, blackScore = 0;
     int level = 0;
     bool setup = false;
 
@@ -163,13 +163,13 @@ int main() {
                 }
             }
             if (command == "resign") {
-                if (turn == "White") {
+                if (board->getWhitePlaying()) {
                     // Can also include this in Game with ostream
-                    ++blackscore;
-                    cout << turn << " wins!" << endl;
+                    ++blackScore;
+                    cout << "Black wins!" << endl;
                 } else {
                     ++whiteScore;
-                    cout << turn << " wins!" << endl;
+                    cout << "White wins!" << endl;
                 }
             }
             if (command == "move") {
@@ -218,9 +218,11 @@ int main() {
                 }
                 if (board->inCheckmate()) {
                     if (board->getWhitePlaying()) {
+                        ++blackScore;
                         cout << "Checkmate! Black wins!" << endl;
                     } else {
                         cout << "Checkmate! White wins!" << endl;
+                        ++whiteScore;
                     }
                     break;
                 }
@@ -276,6 +278,10 @@ int main() {
             }
         }
     }
+
+    cout << "Final Score:" << endl;
+    cout << "White: " << whiteScore << endl;
+    cout << "Black: " << blackScore << endl;
 
     delete textDisplay;
     delete graphicsDisplay;
